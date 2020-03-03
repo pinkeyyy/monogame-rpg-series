@@ -38,6 +38,9 @@
     <Reference Include="MonoGame.Extended, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Extended.3.7.0\lib\netstandard2.0\MonoGame.Extended.dll</HintPath>
     </Reference>
+    <Reference Include="MonoGame.Extended.Input, Version=3.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MonoGame.Extended.Input.3.7.0\lib\netstandard2.0\MonoGame.Extended.Input.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Forms.DX, Version=2.3.8.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MonoGame.Forms.DX.2.3.8\lib\net451\MonoGame.Forms.DX.dll</HintPath>
     </Reference>
