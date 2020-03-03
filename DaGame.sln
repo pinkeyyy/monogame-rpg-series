@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaGame", "DaGame\DaGame.csproj", "{66DB9807-3965-49B6-8F96-283783D4AF7C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaGameEditor", "DaGameEditor\DaGameEditor.csproj", "{12324310-28D5-4C6B-B64A-2C3BD87BF20B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DaGameEngine", "DaGameEngine\DaGameEngine.csproj", "{75DB68AA-9F5E-4463-8EA2-E98288A38A99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{66DB9807-3965-49B6-8F96-283783D4AF7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66DB9807-3965-49B6-8F96-283783D4AF7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66DB9807-3965-49B6-8F96-283783D4AF7C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12324310-28D5-4C6B-B64A-2C3BD87BF20B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12324310-28D5-4C6B-B64A-2C3BD87BF20B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12324310-28D5-4C6B-B64A-2C3BD87BF20B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12324310-28D5-4C6B-B64A-2C3BD87BF20B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75DB68AA-9F5E-4463-8EA2-E98288A38A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75DB68AA-9F5E-4463-8EA2-E98288A38A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75DB68AA-9F5E-4463-8EA2-E98288A38A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75DB68AA-9F5E-4463-8EA2-E98288A38A99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
