@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DaGameEngine;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -54,9 +55,7 @@ namespace DaGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            myMap.draw(spriteBatch);
-
-            base.Draw(gameTime);
+            myMap.Draw(spriteBatch);
         }
     }
 }
