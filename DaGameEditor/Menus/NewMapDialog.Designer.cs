@@ -51,7 +51,6 @@
             this.numericMapWidth.Size = new System.Drawing.Size(120, 20);
             this.numericMapWidth.TabIndex = 0;
             this.numericMapWidth.Enter += new System.EventHandler(this.numericUpDown_Enter);
-            this.numericMapWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
             // 
             // label1
             // 
@@ -78,7 +77,6 @@
             this.numericMapHeight.Size = new System.Drawing.Size(120, 20);
             this.numericMapHeight.TabIndex = 2;
             this.numericMapHeight.Enter += new System.EventHandler(this.numericUpDown_Enter);
-            this.numericMapHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
             // 
             // label3
             // 
@@ -96,7 +94,6 @@
             this.numericTileWidth.Size = new System.Drawing.Size(120, 20);
             this.numericTileWidth.TabIndex = 4;
             this.numericTileWidth.Enter += new System.EventHandler(this.numericUpDown_Enter);
-            this.numericTileWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
             // 
             // label4
             // 
@@ -114,10 +111,10 @@
             this.numericTileHeight.Size = new System.Drawing.Size(120, 20);
             this.numericTileHeight.TabIndex = 6;
             this.numericTileHeight.Enter += new System.EventHandler(this.numericUpDown_Enter);
-            this.numericTileHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericUpDown_KeyPress);
             // 
             // buttonOk
             // 
+            this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonOk.Location = new System.Drawing.Point(66, 136);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(75, 23);
@@ -128,6 +125,7 @@
             // 
             // buttonCancel
             // 
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Location = new System.Drawing.Point(147, 136);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
@@ -138,6 +136,7 @@
             // 
             // NewMapDialog
             // 
+            this.AcceptButton = this.buttonOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(243, 176);
@@ -165,8 +164,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.NumericUpDown numericMapWidth;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numericMapHeight;
@@ -176,5 +173,6 @@
         private System.Windows.Forms.NumericUpDown numericTileHeight;
         private System.Windows.Forms.Button buttonOk;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.NumericUpDown numericMapWidth;
     }
 }

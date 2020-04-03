@@ -13,7 +13,15 @@ namespace DaGameEditor
         private void newToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             NewMapDialog dialog = new NewMapDialog();
-            dialog.ShowDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                monoGameEditor1.CreateMap(
+                    dialog.Details.MapWidth,
+                    dialog.Details.MapHeight,
+                    dialog.Details.TileWidth,
+                    dialog.Details.TileHeight
+                );
+            }
         }
     }
 }

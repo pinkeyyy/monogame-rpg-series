@@ -18,6 +18,11 @@ namespace DaGameEditor
             form = FindForm();
         }
 
+        public void CreateMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight)
+        {
+            myMap = new Map(GraphicsDevice, tileWidth, tileHeight, mapWidth, mapHeight);
+        }
+
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

@@ -12,6 +12,8 @@ namespace DaGameEditor.Menus
 {
     public partial class NewMapDialog : Form
     {
+        public CreationDetails Details { get; private set; }
+
         public NewMapDialog()
         {
             InitializeComponent();
@@ -19,7 +21,15 @@ namespace DaGameEditor.Menus
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
-            OnOk();
+            Details = new CreationDetails()
+            {
+                MapWidth = (int)numericMapWidth.Value,
+                MapHeight = (int)numericMapHeight.Value,
+                TileWidth = (int)numericTileWidth.Value,
+                TileHeight = (int)numericTileHeight.Value
+            };
+
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -33,17 +43,12 @@ namespace DaGameEditor.Menus
             numericControl.Select(0, numericControl.Text.Length);
         }
 
-        private void numericUpDown_KeyPress(object sender, KeyPressEventArgs e)
+        public class CreationDetails
         {
-            if (e.KeyChar == (char)13)
-            {
-                OnOk();
-            }
-        }
-
-        private void OnOk()
-        {
-            Close();
+            public int MapWidth { get; set; }
+            public int MapHeight { get; set; }
+            public int TileWidth { get; set; }
+            public int TileHeight { get; set; }
         }
     }
 }
