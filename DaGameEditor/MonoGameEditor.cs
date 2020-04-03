@@ -9,7 +9,6 @@ namespace DaGameEditor
     class MonoGameEditor : MonoGameControl
     {
         private Map myMap;
-        private MouseStateExtended mouseState;
         private Form form;
 
         protected override void Initialize()
@@ -25,7 +24,7 @@ namespace DaGameEditor
             if (!form.ContainsFocus)
                 return;
 
-            mouseState = MouseExtended.GetState();
+            MouseStateExtended mouseState = MouseExtended.GetState();
 
             if (mouseState.IsButtonDown(MouseButton.Right))
             {
