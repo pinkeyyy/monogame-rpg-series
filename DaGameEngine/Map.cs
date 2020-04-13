@@ -29,7 +29,11 @@ namespace DaGameEngine
                 }
             }
 
-            Camera = new OrthographicCamera(device);
+            Camera = new OrthographicCamera(device)
+            {
+                MinimumZoom = 0.25f,
+                MaximumZoom = 1.25f
+            };
         }
 
         public Tile GetTileAtPosition(Vector2 position)
