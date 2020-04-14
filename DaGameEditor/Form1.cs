@@ -1,4 +1,5 @@
 ﻿using DaGameEditor.Menus;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace DaGameEditor
@@ -21,6 +22,22 @@ namespace DaGameEditor
                     dialog.Details.TileWidth,
                     dialog.Details.TileHeight
                 );
+            }
+        }
+
+        private void buttonBrowse_Click(object sender, System.EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                CheckFileExists = true,
+                Multiselect = false,
+                Filter = "PNG Files (*.png)|*.png"
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                // TODO: Show the image.
+                tilesetPreviewer.Image = Image.FromFile(dialog.FileName);
             }
         }
     }
