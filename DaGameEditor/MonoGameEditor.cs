@@ -20,7 +20,7 @@ namespace DaGameEditor
         protected override void Initialize()
         {
             base.Initialize();
-            bootstrap = new Bootstrap(@"..\..\..\Content");
+            bootstrap = new Bootstrap(GraphicsDevice, @"..\..\..\Content");
             myMap = new Map(32, 32, 10, 10);
             form = FindForm();
 
