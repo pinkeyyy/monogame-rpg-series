@@ -81,6 +81,7 @@
             this.comboBoxTilesets.Name = "comboBoxTilesets";
             this.comboBoxTilesets.Size = new System.Drawing.Size(207, 21);
             this.comboBoxTilesets.TabIndex = 5;
+            this.comboBoxTilesets.SelectedIndexChanged += new System.EventHandler(this.comboBoxTilesets_SelectedIndexChanged);
             // 
             // tilesetPreviewer
             // 

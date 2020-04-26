@@ -93,6 +93,7 @@
     <Compile Include="Controls\TilesetPreviewer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Extensions\TilesetExtensions.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

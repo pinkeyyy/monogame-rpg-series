@@ -1,4 +1,5 @@
-﻿using DaGameEditor.Menus;
+﻿using DaGameEditor.Extensions;
+using DaGameEditor.Menus;
 using DaGameEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Drawing;
@@ -47,6 +48,15 @@ namespace DaGameEditor
         {
             List<Tileset> tilesets = monoGameEditor1.Bootstrap.Tilesets;
             comboBoxTilesets.Items.AddRange(tilesets.ToArray());
+        }
+
+        private void comboBoxTilesets_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            Tileset tileset = comboBoxTilesets.SelectedItem as Tileset;
+            if (tileset == null)
+                return;
+
+            tilesetPreviewer.Image = tileset.GetImageFromTexture();
         }
     }
 }
