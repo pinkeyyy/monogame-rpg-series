@@ -9,6 +9,8 @@ namespace DaGameEditor
 {
     class MonoGameEditor : MonoGameControl
     {
+        private Bootstrap bootstrap;
+
         private Map myMap;
         private Form form;
         private Size2 viewportSize;
@@ -17,6 +19,7 @@ namespace DaGameEditor
         protected override void Initialize()
         {
             base.Initialize();
+            bootstrap = new Bootstrap(@"..\..\..\Content");
             myMap = new Map(32, 32, 10, 10);
             form = FindForm();
 
