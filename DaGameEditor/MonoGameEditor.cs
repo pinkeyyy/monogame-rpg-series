@@ -10,7 +10,7 @@ namespace DaGameEditor
 {
     class MonoGameEditor : MonoGameControl
     {
-        private Bootstrap bootstrap;
+        public Bootstrap Bootstrap { get; set; }
 
         private Map myMap;
         private Form form;
@@ -20,7 +20,7 @@ namespace DaGameEditor
         protected override void Initialize()
         {
             base.Initialize();
-            bootstrap = new Bootstrap(GraphicsDevice, @"..\..\..\Content");
+            Bootstrap = new Bootstrap(GraphicsDevice, @"..\..\..\Content");
             myMap = new Map(32, 32, 10, 10);
             form = FindForm();
 

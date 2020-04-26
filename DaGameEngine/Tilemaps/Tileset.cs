@@ -11,5 +11,10 @@ namespace DaGameEngine.Tilemaps
     {
         public string Name { get; set; }
         public Texture2D Texture { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
