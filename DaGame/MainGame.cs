@@ -1,7 +1,9 @@
 ﻿using DaGameEngine;
+using DaGameEngine.Tilemaps;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 
 namespace DaGame
 {
@@ -10,6 +12,7 @@ namespace DaGame
         private GraphicsDeviceManager manager;
         private Map myMap;
         private SpriteBatch spriteBatch;
+        private OrthographicCamera camera;
 
         public MainGame()
         {
@@ -20,7 +23,8 @@ namespace DaGame
         protected override void Initialize()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            myMap = new Map(GraphicsDevice, 32, 32, 10, 10);
+            myMap = new Map(32, 32, 10, 10);
+            camera = new OrthographicCamera(GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)
@@ -48,14 +52,14 @@ namespace DaGame
                 moveVelocity += new Vector2(0, 1);
             }
 
-            myMap.Camera.Move(moveVelocity);
+            camera.Move(moveVelocity);
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            myMap.Draw(spriteBatch);
+            myMap.Draw(spriteBatch, camera);
         }
     }
 }
