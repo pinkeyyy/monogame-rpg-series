@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 
-namespace DaGameEngine
+namespace DaGameEngine.Tilemaps
 {
     public class Map
     {

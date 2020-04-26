@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 
-namespace DaGameEngine
+namespace DaGameEngine.Tilemaps
 {
     public class Tile
     {
