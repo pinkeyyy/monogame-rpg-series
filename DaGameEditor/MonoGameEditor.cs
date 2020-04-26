@@ -12,17 +12,24 @@ namespace DaGameEditor
         private Map myMap;
         private Form form;
         private Size2 viewportSize;
+        private OrthographicCamera camera;
 
         protected override void Initialize()
         {
             base.Initialize();
-            myMap = new Map(GraphicsDevice, 32, 32, 10, 10);
+            myMap = new Map(32, 32, 10, 10);
             form = FindForm();
+
+            camera = new OrthographicCamera(GraphicsDevice)
+            {
+                MinimumZoom = 0.25f,
+                MaximumZoom = 1.25f
+            };
         }
 
         public void CreateMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight)
         {
-            myMap = new Map(GraphicsDevice, tileWidth, tileHeight, mapWidth, mapHeight);
+            myMap = new Map(tileWidth, tileHeight, mapWidth, mapHeight);
         }
 
         protected override void Update(GameTime gameTime)
@@ -37,16 +44,16 @@ namespace DaGameEditor
 
             if (mouseState.IsButtonDown(MouseButton.Right))
             {
-                myMap.Camera.Move(mouseState.DeltaPosition.ToVector2() / myMap.Camera.Zoom);
+                camera.Move(mouseState.DeltaPosition.ToVector2() / camera.Zoom);
             }
             else if (mouseState.DeltaScrollWheelValue != 0)
             {
-                myMap.Camera.Zoom = MathHelper.Clamp(myMap.Camera.Zoom + mouseState.DeltaScrollWheelValue * 0.001f, myMap.Camera.MinimumZoom, myMap.Camera.MaximumZoom);
+                camera.Zoom = MathHelper.Clamp(camera.Zoom + mouseState.DeltaScrollWheelValue * 0.001f, camera.MinimumZoom, camera.MaximumZoom);
             }
             else if (mouseState.WasButtonJustUp(MouseButton.Left))
             {
                 Point mousePosition = mouseState.Position;
-                Vector2 worldPosition = myMap.Camera.ScreenToWorld(mousePosition.ToVector2());
+                Vector2 worldPosition = camera.ScreenToWorld(mousePosition.ToVector2());
 
                 Tile tile = myMap.GetTileAtPosition(worldPosition);
                 if (tile != null)
@@ -66,7 +73,7 @@ namespace DaGameEditor
         protected override void Draw()
         {
             base.Draw();
-            myMap.Draw(Editor.spriteBatch);
+            myMap.Draw(Editor.spriteBatch, camera);
         }
 
         private void HandleViewportSizeChange()
@@ -74,9 +81,9 @@ namespace DaGameEditor
             Size2 graphicsDeviceSize = new Size2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
             if (viewportSize != graphicsDeviceSize)
             {
-                Vector2 cameraCenter = myMap.Camera.Center;
-                myMap.Camera.Origin = new Vector2(graphicsDeviceSize.Width / 2, graphicsDeviceSize.Height / 2);
-                myMap.Camera.LookAt(cameraCenter);
+                Vector2 cameraCenter = camera.Center;
+                camera.Origin = new Vector2(graphicsDeviceSize.Width / 2, graphicsDeviceSize.Height / 2);
+                camera.LookAt(cameraCenter);
 
                 viewportSize = graphicsDeviceSize;
             }

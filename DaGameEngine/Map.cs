@@ -10,9 +10,7 @@ namespace DaGameEngine
         private int tileHeight;
         private Tile[,] tiles;
 
-        public OrthographicCamera Camera;
-
-        public Map(GraphicsDevice device, int tileWidth, int tileHeight, int width, int height)
+        public Map(int tileWidth, int tileHeight, int width, int height)
         {
             this.tileWidth = tileWidth;
             this.tileHeight = tileHeight;
@@ -28,12 +26,6 @@ namespace DaGameEngine
                     };
                 }
             }
-
-            Camera = new OrthographicCamera(device)
-            {
-                MinimumZoom = 0.25f,
-                MaximumZoom = 1.25f
-            };
         }
 
         public Tile GetTileAtPosition(Vector2 position)
@@ -47,9 +39,9 @@ namespace DaGameEngine
             return tiles[x, y];
         }
 
-        public void Draw(SpriteBatch pSpriteBatch)
+        public void Draw(SpriteBatch pSpriteBatch, Camera<Vector2> camera)
         {
-            pSpriteBatch.Begin(transformMatrix: Camera.GetViewMatrix());
+            pSpriteBatch.Begin(transformMatrix: camera.GetViewMatrix());
 
             for (int x = 0; x < tiles.GetLength(0); x++)
             {
