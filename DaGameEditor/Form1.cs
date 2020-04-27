@@ -28,22 +28,6 @@ namespace DaGameEditor
             }
         }
 
-        private void buttonBrowse_Click(object sender, System.EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog()
-            {
-                CheckFileExists = true,
-                Multiselect = false,
-                Filter = "PNG Files (*.png)|*.png"
-            };
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                // TODO: Show the image.
-                tilesetPreviewer.Image = Image.FromFile(dialog.FileName);
-            }
-        }
-
         private void Form1_Load(object sender, System.EventArgs e)
         {
             List<Tileset> tilesets = monoGameEditor1.Bootstrap.Tilesets;
@@ -56,7 +40,7 @@ namespace DaGameEditor
             if (tileset == null)
                 return;
 
-            tilesetPreviewer.Image = tileset.GetImageFromTexture();
+            tilesetPreviewer.Tileset = tileset;
         }
     }
 }

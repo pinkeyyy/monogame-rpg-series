@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DaGameEditor.Extensions;
+using DaGameEngine.Tilemaps;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -11,16 +13,18 @@ namespace DaGameEditor.Controls
     class TilesetPreviewer : Panel
     {
         private PictureBox tilesetPictureBox;
+        private Tileset tileset;
 
-        public Image Image
+        public Tileset Tileset
         {
             get
             {
-                return tilesetPictureBox.Image;
+                return tileset;
             }
             set
             {
-                tilesetPictureBox.Image = value;
+                tileset = value;
+                tilesetPictureBox.Image = tileset != null ? tileset.GetImageFromTexture() : null;
             }
         }
 
