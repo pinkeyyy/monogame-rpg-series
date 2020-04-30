@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using MonoGamePoint = Microsoft.Xna.Framework.Point;
 using MonoGameRectangle = Microsoft.Xna.Framework.Rectangle;
 using SystemRectangle = System.Drawing.Rectangle;
 
@@ -17,6 +18,10 @@ namespace DaGameEditor.Controls
     {
         private PictureBox tilesetPictureBox;
         private Tileset tileset;
+        private int selectedFrameIndex = -1;
+
+        public delegate void OnTileSelectHandler(Tileset tileset, int frameIndex);
+        public event OnTileSelectHandler TileSelect;
 
         public Tileset Tileset
         {
@@ -44,7 +49,30 @@ namespace DaGameEditor.Controls
         {
             if (!DesignMode)
             {
+                tilesetPictureBox.Click += TilesetPictureBox_Click;
                 tilesetPictureBox.Paint += TilesetPictureBox_Paint;
+            }
+        }
+
+        private void TilesetPictureBox_Click(object sender, EventArgs e)
+        {
+            if (tileset == null)
+                return;
+
+            MouseEventArgs mouseArgs = (MouseEventArgs)e;
+            MonoGamePoint mousePoint = new MonoGamePoint(mouseArgs.X, mouseArgs.Y);
+
+            List<MonoGameRectangle> frameRects = tileset.Frames;
+            for (int i = 0; i < frameRects.Count; i++)
+            {
+                if (frameRects[i].Contains(mousePoint))
+                {
+                    selectedFrameIndex = i;
+
+                    TileSelect?.Invoke(tileset, selectedFrameIndex);
+
+                    tilesetPictureBox.Invalidate();
+                }
             }
         }
 
@@ -58,7 +86,11 @@ namespace DaGameEditor.Controls
             {
                 MonoGameRectangle frameRect = frameRects[i];
                 SystemRectangle drawingRect = new SystemRectangle(frameRect.X, frameRect.Y, frameRect.Width - 1, frameRect.Height - 1);
-                e.Graphics.DrawRectangle(Pens.Blue, drawingRect);
+
+                if (selectedFrameIndex == i)
+                    e.Graphics.DrawRectangle(Pens.Red, drawingRect);
+                else
+                    e.Graphics.DrawRectangle(Pens.Blue, drawingRect);
             }
         }
     }
