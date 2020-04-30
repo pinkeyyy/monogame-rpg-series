@@ -31,7 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.buttonBrowse = new System.Windows.Forms.Button();
             this.comboBoxTilesets = new System.Windows.Forms.ComboBox();
             this.tilesetPreviewer = new DaGameEditor.Controls.TilesetPreviewer();
             this.monoGameEditor1 = new DaGameEditor.MonoGameEditor();
@@ -63,16 +62,6 @@
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
-            // buttonBrowse
-            // 
-            this.buttonBrowse.Location = new System.Drawing.Point(12, 245);
-            this.buttonBrowse.Name = "buttonBrowse";
-            this.buttonBrowse.Size = new System.Drawing.Size(207, 23);
-            this.buttonBrowse.TabIndex = 3;
-            this.buttonBrowse.Text = "Browse";
-            this.buttonBrowse.UseVisualStyleBackColor = true;
-            this.buttonBrowse.Click += new System.EventHandler(this.buttonBrowse_Click);
-            // 
             // comboBoxTilesets
             // 
             this.comboBoxTilesets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -86,7 +75,6 @@
             // tilesetPreviewer
             // 
             this.tilesetPreviewer.AutoScroll = true;
-            this.tilesetPreviewer.Image = null;
             this.tilesetPreviewer.Location = new System.Drawing.Point(12, 92);
             this.tilesetPreviewer.Name = "tilesetPreviewer";
             this.tilesetPreviewer.Size = new System.Drawing.Size(207, 147);
@@ -112,7 +100,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.comboBoxTilesets);
             this.Controls.Add(this.tilesetPreviewer);
-            this.Controls.Add(this.buttonBrowse);
             this.Controls.Add(this.monoGameEditor1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -133,7 +120,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.Button buttonBrowse;
         private Controls.TilesetPreviewer tilesetPreviewer;
         private System.Windows.Forms.ComboBox comboBoxTilesets;
     }

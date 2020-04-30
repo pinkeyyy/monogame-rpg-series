@@ -35,20 +35,12 @@ namespace DaGameEngine
             Tilesets = new List<Tileset>();
 
             string tilesetPath = contentPath + @"Tilesets\";
-            List<string> texturePaths = Directory.GetFiles(tilesetPath, "*.png").ToList();
-            for (int i = 0; i < texturePaths.Count; i++)
+            List<string> jsonPaths = Directory.GetFiles(tilesetPath, "*.json").ToList();
+            for (int i = 0; i < jsonPaths.Count; i++)
             {
-                string texturePath = texturePaths[i];
-                using (Stream fileStream = File.OpenRead(texturePath))
-                {
-                    Tileset tilesetInstance = new Tileset()
-                    {
-                        Name = Path.GetFileNameWithoutExtension(texturePath),
-                        Texture = Texture2D.FromStream(graphicsDevice, fileStream)
-                    };
-
-                    Tilesets.Add(tilesetInstance);
-                }
+                string jsonPath = jsonPaths[i];
+                Tileset tileset = Tileset.FromJsonFile(jsonPath, graphicsDevice);
+                Tilesets.Add(tileset);
             }
         }
     }
