@@ -11,6 +11,7 @@ namespace DaGameEditor
     class MonoGameEditor : MonoGameControl
     {
         public Bootstrap Bootstrap { get; set; }
+        public Tile BrushTile { get;set; }
 
         private Map myMap;
         private Form form;
@@ -45,6 +46,11 @@ namespace DaGameEditor
             HandleViewportSizeChange();
 
             MouseStateExtended mouseState = MouseExtended.GetState();
+            Point mousePosition = mouseState.Position;
+            Vector2 worldPosition = camera.ScreenToWorld(mousePosition.ToVector2());
+
+            Map.TilePositionDetail tilePositionDetail = myMap.GetTileAtPosition(worldPosition);
+            Tile tile = tilePositionDetail.Tile;
 
             if (mouseState.IsButtonDown(MouseButton.Right))
             {
@@ -54,30 +60,23 @@ namespace DaGameEditor
             {
                 camera.Zoom = MathHelper.Clamp(camera.Zoom + mouseState.DeltaScrollWheelValue * 0.001f, camera.MinimumZoom, camera.MaximumZoom);
             }
-            else if (mouseState.WasButtonJustUp(MouseButton.Left))
+            else if (mouseState.IsButtonDown(MouseButton.Left))
             {
-                Point mousePosition = mouseState.Position;
-                Vector2 worldPosition = camera.ScreenToWorld(mousePosition.ToVector2());
-
-                Tile tile = myMap.GetTileAtPosition(worldPosition);
-                if (tile != null)
+                if (tile != null && BrushTile != null)
                 {
-                    if (tile.BackgroundColor == Color.Red)
-                    {
-                        tile.BackgroundColor = Color.Green;
-                    }
-                    else
-                    {
-                        tile.BackgroundColor = Color.Red;
-                    }
+                    tile.TilesetIndex = BrushTile.TilesetIndex;
+                    tile.TileIndex = BrushTile.TileIndex;
                 }
             }
+
+            if (BrushTile != null && tilePositionDetail.IsValidPosition)
+                myMap.AddImmediateTile(tilePositionDetail.Coordinates.X, tilePositionDetail.Coordinates.Y, BrushTile);
         }
 
         protected override void Draw()
         {
             base.Draw();
-            myMap.Draw(Editor.spriteBatch, camera);
+            myMap.Draw(Editor.spriteBatch, camera, Bootstrap.Tilesets);
         }
 
         private void HandleViewportSizeChange()

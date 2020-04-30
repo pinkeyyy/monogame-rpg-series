@@ -42,5 +42,16 @@ namespace DaGameEditor
 
             tilesetPreviewer.Tileset = tileset;
         }
+
+        private void tilesetPreviewer_TileSelect(Tileset tileset, int frameIndex)
+        {
+            Tile brushTile = new Tile()
+            {
+                TilesetIndex = monoGameEditor1.Bootstrap.Tilesets.IndexOf(tileset),
+                TileIndex = frameIndex
+            };
+
+            monoGameEditor1.BrushTile = brushTile;
+        }
     }
 }

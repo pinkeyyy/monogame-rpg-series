@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
+using System;
+using System.Collections.Generic;
 
 namespace DaGameEngine.Tilemaps
 {
@@ -9,6 +11,7 @@ namespace DaGameEngine.Tilemaps
         private int tileWidth;
         private int tileHeight;
         private Tile[,] tiles;
+        private List<Tuple<int, int, Tile>> immediateTiles = new List<Tuple<int, int, Tile>>();
 
         public Map(int tileWidth, int tileHeight, int width, int height)
         {
@@ -28,18 +31,32 @@ namespace DaGameEngine.Tilemaps
             }
         }
 
-        public Tile GetTileAtPosition(Vector2 position)
+        public TilePositionDetail GetTileAtPosition(Vector2 position)
         {
+            TilePositionDetail detail = new TilePositionDetail();
+
             int x = (int)position.X / tileWidth;
             int y = (int)position.Y / tileHeight;
 
-            if (x < 0 || y < 0 || x > tiles.GetUpperBound(0) || y > tiles.GetUpperBound(1))
-                return null;
+            detail.Coordinates = new Point(x, y);
 
-            return tiles[x, y];
+            if (x < 0 || y < 0 || x > tiles.GetUpperBound(0) || y > tiles.GetUpperBound(1))
+            {
+                detail.IsValidPosition = false;
+                return detail;
+            }
+
+            detail.IsValidPosition = true;
+            detail.Tile = tiles[x, y];
+            return detail;
         }
 
-        public void Draw(SpriteBatch pSpriteBatch, Camera<Vector2> camera)
+        public void AddImmediateTile(int x, int y, Tile tile)
+        {
+            immediateTiles.Add(new Tuple<int, int, Tile>(x, y, tile));
+        }
+
+        public void Draw(SpriteBatch pSpriteBatch, Camera<Vector2> camera, List<Tileset> tilesets)
         {
             pSpriteBatch.Begin(transformMatrix: camera.GetViewMatrix());
 
@@ -49,13 +66,26 @@ namespace DaGameEngine.Tilemaps
                 {
                     Vector2 tilePosition = new Vector2(x * tileWidth, y * tileHeight);
                     Tile tile = tiles[x, y];
-
-                    pSpriteBatch.FillRectangle(tilePosition, new Size2(tileWidth, tileHeight), Color.White);
-                    pSpriteBatch.FillRectangle(tilePosition + new Vector2(1, 1), new Size2(tileWidth - 2, tileHeight - 2), tile.BackgroundColor);
+                    tile.Draw(pSpriteBatch, tilePosition, tileWidth, tileHeight, tilesets); 
                 }
             }
 
+            for (int i = 0; i < immediateTiles.Count; i++)
+            {
+                var (x, y, tile) = immediateTiles[i];
+                Vector2 tilePosition = new Vector2(x * tileWidth, y * tileHeight);
+                tile.Draw(pSpriteBatch, tilePosition, tileWidth, tileHeight, tilesets);
+            }
+
             pSpriteBatch.End();
+            immediateTiles.Clear();
+        }
+
+        public class TilePositionDetail
+        {
+            public Tile Tile { get; set; }
+            public Point Coordinates { get; set; }
+            public bool IsValidPosition { get; set; }
         }
     }
 }

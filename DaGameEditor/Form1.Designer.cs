@@ -79,6 +79,8 @@
             this.tilesetPreviewer.Name = "tilesetPreviewer";
             this.tilesetPreviewer.Size = new System.Drawing.Size(207, 147);
             this.tilesetPreviewer.TabIndex = 4;
+            this.tilesetPreviewer.Tileset = null;
+            this.tilesetPreviewer.TileSelect += new DaGameEditor.Controls.TilesetPreviewer.OnTileSelectHandler(this.tilesetPreviewer_TileSelect);
             // 
             // monoGameEditor1
             // 

@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using MonoGame.Extended;
+using System.Collections.Generic;
 
 namespace DaGame
 {
@@ -59,7 +60,7 @@ namespace DaGame
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            myMap.Draw(spriteBatch, camera);
+            myMap.Draw(spriteBatch, camera, new List<Tileset>());
         }
     }
 }
