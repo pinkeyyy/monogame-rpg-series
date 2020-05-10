@@ -37,6 +37,7 @@ namespace DaGameEditor
         private void comboBoxTilesets_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             Tileset tileset = comboBoxTilesets.SelectedItem as Tileset;
+            buttonEditTileset.Enabled = tileset != null;
             if (tileset == null)
                 return;
 
