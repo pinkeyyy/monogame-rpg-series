@@ -54,5 +54,15 @@ namespace DaGameEditor
 
             monoGameEditor1.BrushTile = brushTile;
         }
+
+        private void buttonEditTileset_Click(object sender, System.EventArgs e)
+        {
+            EditTilesetDialog dialog = new EditTilesetDialog()
+            {
+                SourceTileset = (Tileset)comboBoxTilesets.SelectedItem
+            };
+
+            dialog.ShowDialog();
+        }
     }
 }

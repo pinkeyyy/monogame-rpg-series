@@ -106,6 +106,7 @@
             this.buttonEditTileset.TabIndex = 6;
             this.buttonEditTileset.Text = "Edit Tileset";
             this.buttonEditTileset.UseVisualStyleBackColor = true;
+            this.buttonEditTileset.Click += new System.EventHandler(this.buttonEditTileset_Click);
             // 
             // Form1
             // 
