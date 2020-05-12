@@ -37,6 +37,7 @@ namespace DaGameEditor
         private void comboBoxTilesets_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             Tileset tileset = comboBoxTilesets.SelectedItem as Tileset;
+            buttonEditTileset.Enabled = tileset != null;
             if (tileset == null)
                 return;
 
@@ -52,6 +53,21 @@ namespace DaGameEditor
             };
 
             monoGameEditor1.BrushTile = brushTile;
+        }
+
+        private void buttonEditTileset_Click(object sender, System.EventArgs e)
+        {
+            EditTilesetDialog dialog = new EditTilesetDialog()
+            {
+                SourceTileset = (Tileset)comboBoxTilesets.SelectedItem
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                dialog.SourceTileset.Apply(dialog.ModifiedTileset);
+                tilesetPreviewer.RefreshFrames();
+                monoGameEditor1.Bootstrap.SaveTilesets();
+            }
         }
     }
 }

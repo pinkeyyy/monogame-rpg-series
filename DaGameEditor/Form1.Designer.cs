@@ -34,6 +34,7 @@
             this.comboBoxTilesets = new System.Windows.Forms.ComboBox();
             this.tilesetPreviewer = new DaGameEditor.Controls.TilesetPreviewer();
             this.monoGameEditor1 = new DaGameEditor.MonoGameEditor();
+            this.buttonEditTileset = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +76,7 @@
             // tilesetPreviewer
             // 
             this.tilesetPreviewer.AutoScroll = true;
-            this.tilesetPreviewer.Location = new System.Drawing.Point(12, 92);
+            this.tilesetPreviewer.Location = new System.Drawing.Point(12, 115);
             this.tilesetPreviewer.Name = "tilesetPreviewer";
             this.tilesetPreviewer.Size = new System.Drawing.Size(207, 147);
             this.tilesetPreviewer.TabIndex = 4;
@@ -88,6 +89,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.monoGameEditor1.Bootstrap = null;
+            this.monoGameEditor1.BrushTile = null;
             this.monoGameEditor1.Location = new System.Drawing.Point(244, 52);
             this.monoGameEditor1.MouseHoverUpdatesOnly = false;
             this.monoGameEditor1.Name = "monoGameEditor1";
@@ -95,11 +97,23 @@
             this.monoGameEditor1.TabIndex = 0;
             this.monoGameEditor1.Text = "monoGameEditor1";
             // 
+            // buttonEditTileset
+            // 
+            this.buttonEditTileset.Enabled = false;
+            this.buttonEditTileset.Location = new System.Drawing.Point(12, 79);
+            this.buttonEditTileset.Name = "buttonEditTileset";
+            this.buttonEditTileset.Size = new System.Drawing.Size(207, 30);
+            this.buttonEditTileset.TabIndex = 6;
+            this.buttonEditTileset.Text = "Edit Tileset";
+            this.buttonEditTileset.UseVisualStyleBackColor = true;
+            this.buttonEditTileset.Click += new System.EventHandler(this.buttonEditTileset_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonEditTileset);
             this.Controls.Add(this.comboBoxTilesets);
             this.Controls.Add(this.tilesetPreviewer);
             this.Controls.Add(this.monoGameEditor1);
@@ -124,6 +138,7 @@
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private Controls.TilesetPreviewer tilesetPreviewer;
         private System.Windows.Forms.ComboBox comboBoxTilesets;
+        private System.Windows.Forms.Button buttonEditTileset;
     }
 }
 
