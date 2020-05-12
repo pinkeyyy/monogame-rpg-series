@@ -24,6 +24,14 @@ namespace DaGameEngine
             LoadTilesets();
         }
 
+        public void SaveTilesets()
+        {
+            for (int i = 0; i < Tilesets.Count; i++)
+            {
+                Tilesets[i].SaveToJson();
+            }
+        }
+
         private void SanitizeContentPath()
         {
             if (contentPath.LastIndexOf(@"\") != contentPath.Length - 1)

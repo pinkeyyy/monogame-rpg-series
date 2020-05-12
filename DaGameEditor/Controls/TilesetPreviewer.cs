@@ -54,6 +54,11 @@ namespace DaGameEditor.Controls
             }
         }
 
+        public void RefreshFrames()
+        {
+            tilesetPictureBox.Invalidate();
+        }
+
         private void TilesetPictureBox_Click(object sender, EventArgs e)
         {
             if (tileset == null)
@@ -71,7 +76,7 @@ namespace DaGameEditor.Controls
 
                     TileSelect?.Invoke(tileset, selectedFrameIndex);
 
-                    tilesetPictureBox.Invalidate();
+                    RefreshFrames();
                 }
             }
         }

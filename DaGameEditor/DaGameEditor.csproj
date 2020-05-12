@@ -106,6 +106,12 @@
     <Compile Include="Menus\EditTilesetDialog.Designer.cs">
       <DependentUpon>EditTilesetDialog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Menus\GenerateFramesDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Menus\GenerateFramesDialog.Designer.cs">
+      <DependentUpon>GenerateFramesDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menus\NewMapDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Menus\EditTilesetDialog.resx">
       <DependentUpon>EditTilesetDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Menus\GenerateFramesDialog.resx">
+      <DependentUpon>GenerateFramesDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menus\NewMapDialog.resx">
       <DependentUpon>NewMapDialog.cs</DependentUpon>

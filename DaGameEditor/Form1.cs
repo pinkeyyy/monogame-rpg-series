@@ -62,7 +62,12 @@ namespace DaGameEditor
                 SourceTileset = (Tileset)comboBoxTilesets.SelectedItem
             };
 
-            dialog.ShowDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                dialog.SourceTileset.Apply(dialog.ModifiedTileset);
+                tilesetPreviewer.RefreshFrames();
+                monoGameEditor1.Bootstrap.SaveTilesets();
+            }
         }
     }
 }
