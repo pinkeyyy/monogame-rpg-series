@@ -76,6 +76,8 @@ namespace DaGameEditor
             {
                 listBoxLayers.Items.Add(newMap.Layers[i]);
             }
+
+            listBoxLayers.SelectedIndex = 0;
         }
 
         private void listBoxLayers_SelectedIndexChanged(object sender, System.EventArgs e)

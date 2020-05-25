@@ -12,12 +12,16 @@ namespace DaGameEngine.Tilemaps
 
         private int tileWidth;
         private int tileHeight;
+        private int width;
+        private int height;
         private List<Tuple<int, int, Tile>> immediateTiles = new List<Tuple<int, int, Tile>>();
 
         public Map(int tileWidth, int tileHeight, int width, int height)
         {
             this.tileWidth = tileWidth;
             this.tileHeight = tileHeight;
+            this.width = width;
+            this.height = height;
             Layers = new List<TileLayer>();
             Layers.Add(new TileLayer(tileWidth, tileHeight, width, height, "Base Layer"));
             Layers.Add(new TileLayer(tileWidth, tileHeight, width, height, "Second Layer"));
@@ -39,6 +43,8 @@ namespace DaGameEngine.Tilemaps
         public void Draw(SpriteBatch pSpriteBatch, Camera<Vector2> camera, List<Tileset> tilesets)
         {
             pSpriteBatch.Begin(transformMatrix: camera.GetViewMatrix());
+
+            pSpriteBatch.FillRectangle(Vector2.Zero, new Size2(tileWidth * width, tileHeight * height), Color.Gray);
 
             for (int i = 0; i < Layers.Count; i++)
             {

@@ -28,10 +28,7 @@ namespace DaGameEngine.Tilemaps
             {
                 for (int y = 0; y < tiles.GetLength(1); y++)
                 {
-                    tiles[x, y] = new Tile()
-                    {
-                        BackgroundColor = (x + y) % 2 == 0 ? Color.Red : Color.Green
-                    };
+                    tiles[x, y] = new Tile();
                 }
             }
         }
