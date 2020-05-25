@@ -10,45 +10,23 @@ namespace DaGameEngine.Tilemaps
     {
         private int tileWidth;
         private int tileHeight;
-        private Tile[,] tiles;
+        private List<TileLayer> layers;
         private List<Tuple<int, int, Tile>> immediateTiles = new List<Tuple<int, int, Tile>>();
 
         public Map(int tileWidth, int tileHeight, int width, int height)
         {
             this.tileWidth = tileWidth;
             this.tileHeight = tileHeight;
-
-            tiles = new Tile[width, height];
-            for (int x = 0; x < tiles.GetLength(0); x++)
-            {
-                for (int y = 0; y < tiles.GetLength(1); y++)
-                {
-                    tiles[x, y] = new Tile()
-                    {
-                        BackgroundColor = (x + y) % 2 == 0 ? Color.Red : Color.Green
-                    };
-                }
-            }
+            layers = new List<TileLayer>();
+            layers.Add(new TileLayer(tileWidth, tileHeight, width, height));
         }
 
-        public TilePositionDetail GetTileAtPosition(Vector2 position)
+        public TileLayer.TilePositionDetail GetTileAtPosition(Vector2 position, int layerIndex)
         {
-            TilePositionDetail detail = new TilePositionDetail();
+            if (layerIndex < 0 || layerIndex >= layers.Count)
+                return null;
 
-            int x = (int)position.X / tileWidth;
-            int y = (int)position.Y / tileHeight;
-
-            detail.Coordinates = new Point(x, y);
-
-            if (x < 0 || y < 0 || x > tiles.GetUpperBound(0) || y > tiles.GetUpperBound(1))
-            {
-                detail.IsValidPosition = false;
-                return detail;
-            }
-
-            detail.IsValidPosition = true;
-            detail.Tile = tiles[x, y];
-            return detail;
+            return layers[layerIndex].GetTileAtPosition(position);
         }
 
         public void AddImmediateTile(int x, int y, Tile tile)
@@ -60,14 +38,9 @@ namespace DaGameEngine.Tilemaps
         {
             pSpriteBatch.Begin(transformMatrix: camera.GetViewMatrix());
 
-            for (int x = 0; x < tiles.GetLength(0); x++)
+            for (int i = 0; i < layers.Count; i++)
             {
-                for (int y = 0; y < tiles.GetLength(1); y++)
-                {
-                    Vector2 tilePosition = new Vector2(x * tileWidth, y * tileHeight);
-                    Tile tile = tiles[x, y];
-                    tile.Draw(pSpriteBatch, tilePosition, tileWidth, tileHeight, tilesets); 
-                }
+                layers[i].Draw(pSpriteBatch, camera, tilesets);
             }
 
             for (int i = 0; i < immediateTiles.Count; i++)
@@ -79,13 +52,6 @@ namespace DaGameEngine.Tilemaps
 
             pSpriteBatch.End();
             immediateTiles.Clear();
-        }
-
-        public class TilePositionDetail
-        {
-            public Tile Tile { get; set; }
-            public Point Coordinates { get; set; }
-            public bool IsValidPosition { get; set; }
         }
     }
 }

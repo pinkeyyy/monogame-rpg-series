@@ -49,7 +49,7 @@ namespace DaGameEditor
             Point mousePosition = mouseState.Position;
             Vector2 worldPosition = camera.ScreenToWorld(mousePosition.ToVector2());
 
-            Map.TilePositionDetail tilePositionDetail = myMap.GetTileAtPosition(worldPosition);
+            TileLayer.TilePositionDetail tilePositionDetail = myMap.GetTileAtPosition(worldPosition, 0);
             Tile tile = tilePositionDetail.Tile;
 
             if (mouseState.IsButtonDown(MouseButton.Right))
