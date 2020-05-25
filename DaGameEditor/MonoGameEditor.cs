@@ -15,6 +15,7 @@ namespace DaGameEditor
 
         public Bootstrap Bootstrap { get; set; }
         public Tile BrushTile { get;set; }
+        public int ActiveLayer { get; set; }
 
         private Map myMap;
         private Form form;
@@ -53,7 +54,7 @@ namespace DaGameEditor
             Point mousePosition = mouseState.Position;
             Vector2 worldPosition = camera.ScreenToWorld(mousePosition.ToVector2());
 
-            TileLayer.TilePositionDetail tilePositionDetail = myMap.GetTileAtPosition(worldPosition, 0);
+            TileLayer.TilePositionDetail tilePositionDetail = myMap.GetTileAtPosition(worldPosition, ActiveLayer);
             Tile tile = tilePositionDetail.Tile;
 
             if (mouseState.IsButtonDown(MouseButton.Right))

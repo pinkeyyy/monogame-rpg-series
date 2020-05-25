@@ -117,6 +117,7 @@
             this.listBoxLayers.Name = "listBoxLayers";
             this.listBoxLayers.Size = new System.Drawing.Size(207, 82);
             this.listBoxLayers.TabIndex = 7;
+            this.listBoxLayers.SelectedIndexChanged += new System.EventHandler(this.listBoxLayers_SelectedIndexChanged);
             // 
             // Form1
             // 

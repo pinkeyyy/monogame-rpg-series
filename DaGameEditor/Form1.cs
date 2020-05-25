@@ -77,5 +77,10 @@ namespace DaGameEditor
                 listBoxLayers.Items.Add(newMap.Layers[i]);
             }
         }
+
+        private void listBoxLayers_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            monoGameEditor1.ActiveLayer = listBoxLayers.SelectedIndex;
+        }
     }
 }
