@@ -10,8 +10,12 @@ namespace DaGameEditor
 {
     class MonoGameEditor : MonoGameControl
     {
+        public delegate void OnNewMapHandler(Map newMap);
+        public event OnNewMapHandler NewMap;
+
         public Bootstrap Bootstrap { get; set; }
         public Tile BrushTile { get;set; }
+        public int ActiveLayer { get; set; }
 
         private Map myMap;
         private Form form;
@@ -22,7 +26,7 @@ namespace DaGameEditor
         {
             base.Initialize();
             Bootstrap = new Bootstrap(GraphicsDevice, @"..\..\..\Content");
-            myMap = new Map(32, 32, 10, 10);
+            CreateMap(10, 10, 32, 32);
             form = FindForm();
 
             camera = new OrthographicCamera(GraphicsDevice)
@@ -35,6 +39,7 @@ namespace DaGameEditor
         public void CreateMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight)
         {
             myMap = new Map(tileWidth, tileHeight, mapWidth, mapHeight);
+            NewMap?.Invoke(myMap);
         }
 
         protected override void Update(GameTime gameTime)
@@ -49,7 +54,7 @@ namespace DaGameEditor
             Point mousePosition = mouseState.Position;
             Vector2 worldPosition = camera.ScreenToWorld(mousePosition.ToVector2());
 
-            Map.TilePositionDetail tilePositionDetail = myMap.GetTileAtPosition(worldPosition);
+            TileLayer.TilePositionDetail tilePositionDetail = myMap.GetTileAtPosition(worldPosition, ActiveLayer);
             Tile tile = tilePositionDetail.Tile;
 
             if (mouseState.IsButtonDown(MouseButton.Right))

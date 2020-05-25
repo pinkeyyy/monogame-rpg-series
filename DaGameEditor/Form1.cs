@@ -69,5 +69,20 @@ namespace DaGameEditor
                 monoGameEditor1.Bootstrap.SaveTilesets();
             }
         }
+
+        private void monoGameEditor1_NewMap(Map newMap)
+        {
+            for (int i = 0; i < newMap.Layers.Count; i++)
+            {
+                listBoxLayers.Items.Add(newMap.Layers[i]);
+            }
+
+            listBoxLayers.SelectedIndex = 0;
+        }
+
+        private void listBoxLayers_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            monoGameEditor1.ActiveLayer = listBoxLayers.SelectedIndex;
+        }
     }
 }
