@@ -35,6 +35,7 @@
             this.tilesetPreviewer = new DaGameEditor.Controls.TilesetPreviewer();
             this.monoGameEditor1 = new DaGameEditor.MonoGameEditor();
             this.buttonEditTileset = new System.Windows.Forms.Button();
+            this.listBoxLayers = new System.Windows.Forms.ListBox();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +97,7 @@
             this.monoGameEditor1.Size = new System.Drawing.Size(544, 386);
             this.monoGameEditor1.TabIndex = 0;
             this.monoGameEditor1.Text = "monoGameEditor1";
+            this.monoGameEditor1.NewMap += new DaGameEditor.MonoGameEditor.OnNewMapHandler(this.monoGameEditor1_NewMap);
             // 
             // buttonEditTileset
             // 
@@ -108,11 +110,20 @@
             this.buttonEditTileset.UseVisualStyleBackColor = true;
             this.buttonEditTileset.Click += new System.EventHandler(this.buttonEditTileset_Click);
             // 
+            // listBoxLayers
+            // 
+            this.listBoxLayers.FormattingEnabled = true;
+            this.listBoxLayers.Location = new System.Drawing.Point(12, 268);
+            this.listBoxLayers.Name = "listBoxLayers";
+            this.listBoxLayers.Size = new System.Drawing.Size(207, 82);
+            this.listBoxLayers.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.listBoxLayers);
             this.Controls.Add(this.buttonEditTileset);
             this.Controls.Add(this.comboBoxTilesets);
             this.Controls.Add(this.tilesetPreviewer);
@@ -139,6 +150,7 @@
         private Controls.TilesetPreviewer tilesetPreviewer;
         private System.Windows.Forms.ComboBox comboBoxTilesets;
         private System.Windows.Forms.Button buttonEditTileset;
+        private System.Windows.Forms.ListBox listBoxLayers;
     }
 }
 

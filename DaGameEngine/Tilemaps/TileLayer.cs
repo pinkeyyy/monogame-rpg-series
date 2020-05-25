@@ -11,14 +11,17 @@ namespace DaGameEngine.Tilemaps
 {
     public class TileLayer
     {
+        public string Name { get; set; }
+
         private int tileWidth;
         private int tileHeight;
         private Tile[,] tiles;
 
-        public TileLayer(int tileWidth, int tileHeight, int width, int height)
+        public TileLayer(int tileWidth, int tileHeight, int width, int height, string name)
         {
             this.tileWidth = tileWidth;
             this.tileHeight = tileHeight;
+            Name = name;
 
             tiles = new Tile[width, height];
             for (int x = 0; x < tiles.GetLength(0); x++)
@@ -64,6 +67,11 @@ namespace DaGameEngine.Tilemaps
                     tile.Draw(pSpriteBatch, tilePosition, tileWidth, tileHeight, tilesets);
                 }
             }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
 
         public class TilePositionDetail
