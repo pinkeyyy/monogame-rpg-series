@@ -63,7 +63,7 @@ namespace DaGameEditor
             }
             else if (mouseState.DeltaScrollWheelValue != 0)
             {
-                camera.Zoom = MathHelper.Clamp(camera.Zoom + mouseState.DeltaScrollWheelValue * 0.001f, camera.MinimumZoom, camera.MaximumZoom);
+                camera.Zoom = MathHelper.Clamp(camera.Zoom - mouseState.DeltaScrollWheelValue * 0.001f, camera.MinimumZoom, camera.MaximumZoom);
             }
             else if (mouseState.IsButtonDown(MouseButton.Left))
             {
