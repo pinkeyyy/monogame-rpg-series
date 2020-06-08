@@ -16,9 +16,23 @@ namespace DaGameEditor.Controls
 {
     class TilesetPreviewer : Panel
     {
+        private readonly List<float> zoomLevels = new List<float>()
+        {
+            0.25f,
+            0.5f,
+            0.75f,
+            1f,
+            1.25f,
+            1.5f,
+            1.75f,
+            2f
+        };
+
         private PictureBox tilesetPictureBox;
         private Tileset tileset;
         private int selectedFrameIndex = -1;
+        private Size originalSize;
+        private int currentZoomLevel;
 
         public delegate void OnTileSelectHandler(Tileset tileset, int frameIndex);
         public event OnTileSelectHandler TileSelect;
@@ -32,7 +46,7 @@ namespace DaGameEditor.Controls
             set
             {
                 tileset = value;
-                tilesetPictureBox.Image = tileset != null ? tileset.GetImageFromTexture() : null;
+                OnTilesetChange();
             }
         }
 
@@ -41,7 +55,7 @@ namespace DaGameEditor.Controls
             AutoScroll = true;
 
             tilesetPictureBox = new PictureBox();
-            tilesetPictureBox.SizeMode = PictureBoxSizeMode.AutoSize;
+            tilesetPictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             Controls.Add(tilesetPictureBox);
         }
 
@@ -51,6 +65,7 @@ namespace DaGameEditor.Controls
             {
                 tilesetPictureBox.Click += TilesetPictureBox_Click;
                 tilesetPictureBox.Paint += TilesetPictureBox_Paint;
+                tilesetPictureBox.MouseWheel += TilesetPictureBox_MouseWheel;
             }
         }
 
@@ -70,7 +85,8 @@ namespace DaGameEditor.Controls
             List<MonoGameRectangle> frameRects = tileset.Frames;
             for (int i = 0; i < frameRects.Count; i++)
             {
-                if (frameRects[i].Contains(mousePoint))
+                MonoGameRectangle scaledRect = frameRects[i].Scale(zoomLevels[currentZoomLevel]);
+                if (scaledRect.Contains(mousePoint))
                 {
                     selectedFrameIndex = i;
 
@@ -89,7 +105,7 @@ namespace DaGameEditor.Controls
             List<MonoGameRectangle> frameRects = tileset.Frames;
             for (int i = 0; i < frameRects.Count; i++)
             {
-                MonoGameRectangle frameRect = frameRects[i];
+                MonoGameRectangle frameRect = frameRects[i].Scale(zoomLevels[currentZoomLevel]);
                 SystemRectangle drawingRect = new SystemRectangle(frameRect.X, frameRect.Y, frameRect.Width - 1, frameRect.Height - 1);
 
                 if (selectedFrameIndex == i)
@@ -97,6 +113,43 @@ namespace DaGameEditor.Controls
                 else
                     e.Graphics.DrawRectangle(Pens.Blue, drawingRect);
             }
+        }
+
+        private void TilesetPictureBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (ModifierKeys != Keys.Shift)
+                return;
+
+            HandledMouseEventArgs handledArgs = (HandledMouseEventArgs)e;
+            handledArgs.Handled = true;
+
+            if (e.Delta > 0)
+            {
+                // Zoom in
+                currentZoomLevel = Math.Min(currentZoomLevel + 1, zoomLevels.Count - 1);
+            }
+            else
+            {
+                // Zoom out
+                currentZoomLevel = Math.Max(currentZoomLevel - 1, 0);
+            }
+
+            tilesetPictureBox.Size = new Size((int)(originalSize.Width * zoomLevels[currentZoomLevel]), (int)(originalSize.Height * zoomLevels[currentZoomLevel]));
+        }
+
+        private void OnTilesetChange()
+        {
+            if (Tileset == null)
+            {
+                tilesetPictureBox.Image = null;
+                return;
+            }
+
+            Image tilesetImage = tileset.GetImageFromTexture();
+            tilesetPictureBox.Image = tilesetImage;
+            tilesetPictureBox.Size = new Size(tilesetImage.Width, tilesetImage.Height);
+            originalSize = tilesetPictureBox.Size;
+            currentZoomLevel = 3;
         }
     }
 }

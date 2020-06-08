@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DaGameEngine.JsonConverters;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Newtonsoft.Json;
 using System;
@@ -21,7 +22,7 @@ namespace DaGameEngine.Tilemaps
         public static Tileset FromJsonFile(string filePath, GraphicsDevice graphicsDevice)
         {
             Tileset instance = JsonConvert.DeserializeObject<Tileset>(
-                File.ReadAllText(filePath)
+                File.ReadAllText(filePath), new RectangleJsonConverter()
             );
 
             string imagePath = Path.ChangeExtension(filePath, ".png");
@@ -54,7 +55,7 @@ namespace DaGameEngine.Tilemaps
 
         public void SaveToJson()
         {
-            File.WriteAllText(FilePath, JsonConvert.SerializeObject(this, Formatting.Indented));
+            File.WriteAllText(FilePath, JsonConvert.SerializeObject(this, Formatting.Indented, new RectangleJsonConverter()));
         }
 
         public override string ToString()
