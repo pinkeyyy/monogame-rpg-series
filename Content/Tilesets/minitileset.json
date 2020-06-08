@@ -2,17 +2,7 @@
   "FilePath": "..\\..\\..\\Content\\Tilesets\\minitileset.json",
   "Name": "Mini Tileset",
   "Frames": [
-    {
-      "X": 0,
-      "Y": 0,
-      "Width": 32,
-      "Height": 32
-    },
-    {
-      "X": 32,
-      "Y": 0,
-      "Width": 32,
-      "Height": 32
-    }
+    "0 0 32 32",
+    "32 0 32 32"
   ]
 }
