@@ -84,5 +84,15 @@ namespace DaGameEditor
         {
             monoGameEditor1.ActiveLayer = listBoxLayers.SelectedIndex;
         }
+
+        private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
     }
 }
