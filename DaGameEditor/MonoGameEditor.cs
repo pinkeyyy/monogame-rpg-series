@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using MonoGame.Extended;
 using MonoGame.Extended.Input;
 using MonoGame.Forms.Controls;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DaGameEditor
@@ -39,6 +40,17 @@ namespace DaGameEditor
         public void CreateMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight)
         {
             myMap = new Map(tileWidth, tileHeight, mapWidth, mapHeight);
+            NewMap?.Invoke(myMap);
+        }
+
+        public void SaveMap(Stream stream)
+        {
+            myMap.Save(stream);
+        }
+
+        public void LoadMap(Stream stream)
+        {
+            myMap = new Map(stream);
             NewMap?.Invoke(myMap);
         }
 

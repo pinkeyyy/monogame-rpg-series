@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,11 @@ namespace DaGameEngine.Tilemaps
                     tiles[x, y] = new Tile();
                 }
             }
+        }
+
+        internal TileLayer(BinaryReader reader)
+        {
+            Load(reader);
         }
 
         public TilePositionDetail GetTileAtPosition(Vector2 position)
@@ -69,6 +75,46 @@ namespace DaGameEngine.Tilemaps
         public override string ToString()
         {
             return Name;
+        }
+
+        internal void Save(BinaryWriter writer)
+        {
+            writer.Write(tileWidth);
+            writer.Write(tileHeight);
+            writer.Write(Name);
+            writer.Write(tiles.GetLength(0));
+            writer.Write(tiles.GetLength(1));
+
+            for (int x = 0; x < tiles.GetLength(0); x++)
+            {
+                for (int y = 0; y < tiles.GetLength(1); y++)
+                {
+                    writer.Write(tiles[x, y].TilesetIndex);
+                    writer.Write(tiles[x, y].TileIndex);
+                }
+            }
+        }
+
+        private void Load(BinaryReader reader)
+        {
+            tileWidth = reader.ReadInt32();
+            tileHeight = reader.ReadInt32();
+            Name = reader.ReadString();
+            int width = reader.ReadInt32();
+            int height = reader.ReadInt32();
+
+            tiles = new Tile[width, height];
+            for (int x = 0; x < tiles.GetLength(0); x++)
+            {
+                for (int y = 0; y < tiles.GetLength(1); y++)
+                {
+                    tiles[x, y] = new Tile()
+                    {
+                        TilesetIndex = reader.ReadInt32(),
+                        TileIndex = reader.ReadInt32()
+                    };
+                }
+            }
         }
 
         public class TilePositionDetail

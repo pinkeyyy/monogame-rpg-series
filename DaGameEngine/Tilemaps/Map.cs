@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using MonoGame.Extended;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace DaGameEngine.Tilemaps
 {
@@ -25,6 +26,12 @@ namespace DaGameEngine.Tilemaps
             Layers = new List<TileLayer>();
             Layers.Add(new TileLayer(tileWidth, tileHeight, width, height, "Base Layer"));
             Layers.Add(new TileLayer(tileWidth, tileHeight, width, height, "Second Layer"));
+        }
+
+        public Map(Stream stream)
+        {
+            Layers = new List<TileLayer>();
+            Load(stream);
         }
 
         public TileLayer.TilePositionDetail GetTileAtPosition(Vector2 position, int layerIndex)
@@ -60,6 +67,38 @@ namespace DaGameEngine.Tilemaps
 
             pSpriteBatch.End();
             immediateTiles.Clear();
+        }
+
+        public void Save(Stream stream)
+        {
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(width);
+                writer.Write(height);
+                writer.Write(tileWidth);
+                writer.Write(tileHeight);
+                writer.Write(Layers.Count);
+                for (int i = 0; i < Layers.Count; i++)
+                {
+                    Layers[i].Save(writer);
+                }
+            }
+        }
+
+        private void Load(Stream stream)
+        {
+            using (BinaryReader reader = new BinaryReader(stream))
+            {
+                width = reader.ReadInt32();
+                height = reader.ReadInt32();
+                tileWidth = reader.ReadInt32();
+                tileHeight = reader.ReadInt32();
+                int layerCount = reader.ReadInt32();
+                for (int i = 0; i < layerCount; i++)
+                {
+                    Layers.Add(new TileLayer(reader));
+                }
+            }
         }
     }
 }
