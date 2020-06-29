@@ -3,6 +3,7 @@ using DaGameEditor.Menus;
 using DaGameEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DaGameEditor
@@ -72,6 +73,8 @@ namespace DaGameEditor
 
         private void monoGameEditor1_NewMap(Map newMap)
         {
+            listBoxLayers.Items.Clear();
+
             for (int i = 0; i < newMap.Layers.Count; i++)
             {
                 listBoxLayers.Items.Add(newMap.Layers[i]);
@@ -83,6 +86,40 @@ namespace DaGameEditor
         private void listBoxLayers_SelectedIndexChanged(object sender, System.EventArgs e)
         {
             monoGameEditor1.ActiveLayer = listBoxLayers.SelectedIndex;
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            SaveFileDialog dialog = new SaveFileDialog()
+            {
+                Filter = "Da Game Map (*.map)|*.map"
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fileStream = File.OpenWrite(dialog.FileName))
+                {
+                    monoGameEditor1.SaveMap(fileStream);
+                }
+            }
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog()
+            {
+                Filter = "Da Game Map (*.map)|*.map",
+                Multiselect = false,
+                CheckFileExists = true
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                using (FileStream fileStream = File.OpenRead(dialog.FileName))
+                {
+                    monoGameEditor1.LoadMap(fileStream);
+                }
+            }
         }
     }
 }
