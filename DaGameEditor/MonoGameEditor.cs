@@ -17,6 +17,7 @@ namespace DaGameEditor
         public Bootstrap Bootstrap { get; set; }
         public Tile BrushTile { get;set; }
         public int ActiveLayer { get; set; }
+        public PaintMode Mode { get; set; }
 
         private Map myMap;
         private Form form;
@@ -54,6 +55,11 @@ namespace DaGameEditor
             NewMap?.Invoke(myMap);
         }
 
+        public void SetCollisionLayerVisible(bool visible)
+        {
+            myMap.CollisionLayer.Visible = visible;
+        }
+
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -63,10 +69,12 @@ namespace DaGameEditor
             HandleViewportSizeChange();
 
             MouseStateExtended mouseState = MouseExtended.GetState();
+            KeyboardStateExtended keyboardState = KeyboardExtended.GetState();
             Point mousePosition = mouseState.Position;
             Vector2 worldPosition = camera.ScreenToWorld(mousePosition.ToVector2());
 
             TileLayer.TilePositionDetail tilePositionDetail = myMap.GetTileAtPosition(worldPosition, ActiveLayer);
+            CollisionLayer.CellPositionDetail cellPositionDetail = myMap.GetCellAtPosition(worldPosition);
             Tile tile = tilePositionDetail.Tile;
 
             if (mouseState.IsButtonDown(MouseButton.Right))
@@ -79,10 +87,17 @@ namespace DaGameEditor
             }
             else if (mouseState.IsButtonDown(MouseButton.Left))
             {
-                if (tile != null && BrushTile != null)
+                if (Mode == PaintMode.Tiles && tile != null && BrushTile != null)
                 {
                     tile.TilesetIndex = BrushTile.TilesetIndex;
                     tile.TileIndex = BrushTile.TileIndex;
+                }
+                else if (Mode == PaintMode.Collision && cellPositionDetail.IsValidPosition)
+                {
+                    if (keyboardState.IsControlDown())
+                        myMap.CollisionLayer.UpdateCell(false, cellPositionDetail.Coordinates.X, cellPositionDetail.Coordinates.Y);
+                    else
+                        myMap.CollisionLayer.UpdateCell(true, cellPositionDetail.Coordinates.X, cellPositionDetail.Coordinates.Y);
                 }
             }
 
@@ -107,6 +122,12 @@ namespace DaGameEditor
 
                 viewportSize = graphicsDeviceSize;
             }
+        }
+
+        public enum PaintMode
+        {
+            Tiles = 0,
+            Collision = 1
         }
     }
 }

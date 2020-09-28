@@ -81,6 +81,7 @@ namespace DaGameEditor
             }
 
             listBoxLayers.SelectedIndex = 0;
+            monoGameEditor1.SetCollisionLayerVisible(checkCollisionLayerVisible.Checked);
         }
 
         private void listBoxLayers_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -120,6 +121,23 @@ namespace DaGameEditor
                     monoGameEditor1.LoadMap(fileStream);
                 }
             }
+        }
+
+        private void checkCollisionLayerVisible_CheckedChanged(object sender, System.EventArgs e)
+        {
+            monoGameEditor1.SetCollisionLayerVisible(checkCollisionLayerVisible.Checked);
+        }
+
+        private void radioPaintTiles_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radioPaintTiles.Checked)
+                monoGameEditor1.Mode = MonoGameEditor.PaintMode.Tiles;
+        }
+
+        private void radioPaintCollision_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radioPaintCollision.Checked)
+                monoGameEditor1.Mode = MonoGameEditor.PaintMode.Collision;
         }
     }
 }
