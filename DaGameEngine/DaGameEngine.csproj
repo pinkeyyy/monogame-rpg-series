@@ -81,6 +81,7 @@
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
     <Compile Include="JsonConverters\RectangleJsonConverter.cs" />
+    <Compile Include="Tilemaps\CollisionLayer.cs" />
     <Compile Include="Tilemaps\Map.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tilemaps\Tile.cs" />

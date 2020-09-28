@@ -10,6 +10,7 @@ namespace DaGameEngine.Tilemaps
     public class Map
     {
         public List<TileLayer> Layers { get; private set; }
+        public CollisionLayer CollisionLayer { get; private set; }
 
         private int tileWidth;
         private int tileHeight;
@@ -26,6 +27,8 @@ namespace DaGameEngine.Tilemaps
             Layers = new List<TileLayer>();
             Layers.Add(new TileLayer(tileWidth, tileHeight, width, height, "Base Layer"));
             Layers.Add(new TileLayer(tileWidth, tileHeight, width, height, "Second Layer"));
+
+            CollisionLayer = new CollisionLayer(tileWidth, tileHeight, width, height);
         }
 
         public Map(Stream stream)
@@ -40,6 +43,11 @@ namespace DaGameEngine.Tilemaps
                 return null;
 
             return Layers[layerIndex].GetTileAtPosition(position);
+        }
+
+        public CollisionLayer.CellPositionDetail GetCellAtPosition(Vector2 position)
+        {
+            return CollisionLayer.GetCellAtPosition(position);
         }
 
         public void AddImmediateTile(int x, int y, Tile tile)
@@ -57,6 +65,8 @@ namespace DaGameEngine.Tilemaps
             {
                 Layers[i].Draw(pSpriteBatch, camera, tilesets);
             }
+
+            CollisionLayer.Draw(pSpriteBatch, camera);
 
             for (int i = 0; i < immediateTiles.Count; i++)
             {
@@ -82,6 +92,7 @@ namespace DaGameEngine.Tilemaps
                 {
                     Layers[i].Save(writer);
                 }
+                CollisionLayer.Save(writer);
             }
         }
 
@@ -98,6 +109,7 @@ namespace DaGameEngine.Tilemaps
                 {
                     Layers.Add(new TileLayer(reader));
                 }
+                CollisionLayer = new CollisionLayer(reader);
             }
         }
     }
