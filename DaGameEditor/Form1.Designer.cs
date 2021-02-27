@@ -35,14 +35,15 @@
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxTilesets = new System.Windows.Forms.ComboBox();
-            this.tilesetPreviewer = new DaGameEditor.Controls.TilesetPreviewer();
-            this.monoGameEditor1 = new DaGameEditor.MonoGameEditor();
             this.buttonEditTileset = new System.Windows.Forms.Button();
             this.listBoxLayers = new System.Windows.Forms.ListBox();
             this.checkCollisionLayerVisible = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioPaintTiles = new System.Windows.Forms.RadioButton();
             this.radioPaintCollision = new System.Windows.Forms.RadioButton();
+            this.radioPaintTiles = new System.Windows.Forms.RadioButton();
+            this.previewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tilesetPreviewer = new DaGameEditor.Controls.TilesetPreviewer();
+            this.monoGameEditor1 = new DaGameEditor.MonoGameEditor();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +64,8 @@
             this.newToolStripMenuItem,
             this.toolStripSeparator1,
             this.saveToolStripMenuItem,
-            this.loadToolStripMenuItem});
+            this.loadToolStripMenuItem,
+            this.previewToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
@@ -71,26 +73,26 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(97, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -103,32 +105,6 @@
             this.comboBoxTilesets.Size = new System.Drawing.Size(207, 21);
             this.comboBoxTilesets.TabIndex = 5;
             this.comboBoxTilesets.SelectedIndexChanged += new System.EventHandler(this.comboBoxTilesets_SelectedIndexChanged);
-            // 
-            // tilesetPreviewer
-            // 
-            this.tilesetPreviewer.AutoScroll = true;
-            this.tilesetPreviewer.Location = new System.Drawing.Point(12, 206);
-            this.tilesetPreviewer.Name = "tilesetPreviewer";
-            this.tilesetPreviewer.Size = new System.Drawing.Size(207, 147);
-            this.tilesetPreviewer.TabIndex = 4;
-            this.tilesetPreviewer.Tileset = null;
-            this.tilesetPreviewer.TileSelect += new DaGameEditor.Controls.TilesetPreviewer.OnTileSelectHandler(this.tilesetPreviewer_TileSelect);
-            // 
-            // monoGameEditor1
-            // 
-            this.monoGameEditor1.ActiveLayer = 0;
-            this.monoGameEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.monoGameEditor1.Bootstrap = null;
-            this.monoGameEditor1.BrushTile = null;
-            this.monoGameEditor1.Location = new System.Drawing.Point(244, 52);
-            this.monoGameEditor1.MouseHoverUpdatesOnly = false;
-            this.monoGameEditor1.Name = "monoGameEditor1";
-            this.monoGameEditor1.Size = new System.Drawing.Size(544, 443);
-            this.monoGameEditor1.TabIndex = 0;
-            this.monoGameEditor1.Text = "monoGameEditor1";
-            this.monoGameEditor1.NewMap += new DaGameEditor.MonoGameEditor.OnNewMapHandler(this.monoGameEditor1_NewMap);
             // 
             // buttonEditTileset
             // 
@@ -172,6 +148,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Paint Mode";
             // 
+            // radioPaintCollision
+            // 
+            this.radioPaintCollision.AutoSize = true;
+            this.radioPaintCollision.Location = new System.Drawing.Point(23, 44);
+            this.radioPaintCollision.Name = "radioPaintCollision";
+            this.radioPaintCollision.Size = new System.Drawing.Size(90, 17);
+            this.radioPaintCollision.TabIndex = 11;
+            this.radioPaintCollision.Text = "Paint Collision";
+            this.radioPaintCollision.UseVisualStyleBackColor = true;
+            this.radioPaintCollision.CheckedChanged += new System.EventHandler(this.radioPaintCollision_CheckedChanged);
+            // 
             // radioPaintTiles
             // 
             this.radioPaintTiles.AutoSize = true;
@@ -185,16 +172,39 @@
             this.radioPaintTiles.UseVisualStyleBackColor = true;
             this.radioPaintTiles.CheckedChanged += new System.EventHandler(this.radioPaintTiles_CheckedChanged);
             // 
-            // radioPaintCollision
+            // previewToolStripMenuItem
             // 
-            this.radioPaintCollision.AutoSize = true;
-            this.radioPaintCollision.Location = new System.Drawing.Point(23, 44);
-            this.radioPaintCollision.Name = "radioPaintCollision";
-            this.radioPaintCollision.Size = new System.Drawing.Size(90, 17);
-            this.radioPaintCollision.TabIndex = 11;
-            this.radioPaintCollision.Text = "Paint Collision";
-            this.radioPaintCollision.UseVisualStyleBackColor = true;
-            this.radioPaintCollision.CheckedChanged += new System.EventHandler(this.radioPaintCollision_CheckedChanged);
+            this.previewToolStripMenuItem.Name = "previewToolStripMenuItem";
+            this.previewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.previewToolStripMenuItem.Text = "Preview";
+            this.previewToolStripMenuItem.Click += new System.EventHandler(this.previewToolStripMenuItem_Click);
+            // 
+            // tilesetPreviewer
+            // 
+            this.tilesetPreviewer.AutoScroll = true;
+            this.tilesetPreviewer.Location = new System.Drawing.Point(12, 206);
+            this.tilesetPreviewer.Name = "tilesetPreviewer";
+            this.tilesetPreviewer.Size = new System.Drawing.Size(207, 147);
+            this.tilesetPreviewer.TabIndex = 4;
+            this.tilesetPreviewer.Tileset = null;
+            this.tilesetPreviewer.TileSelect += new DaGameEditor.Controls.TilesetPreviewer.OnTileSelectHandler(this.tilesetPreviewer_TileSelect);
+            // 
+            // monoGameEditor1
+            // 
+            this.monoGameEditor1.ActiveLayer = 0;
+            this.monoGameEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.monoGameEditor1.Bootstrap = null;
+            this.monoGameEditor1.BrushTile = null;
+            this.monoGameEditor1.Location = new System.Drawing.Point(244, 52);
+            this.monoGameEditor1.Mode = DaGameEditor.MonoGameEditor.PaintMode.Tiles;
+            this.monoGameEditor1.MouseHoverUpdatesOnly = false;
+            this.monoGameEditor1.Name = "monoGameEditor1";
+            this.monoGameEditor1.Size = new System.Drawing.Size(544, 443);
+            this.monoGameEditor1.TabIndex = 0;
+            this.monoGameEditor1.Text = "monoGameEditor1";
+            this.monoGameEditor1.NewMap += new DaGameEditor.MonoGameEditor.OnNewMapHandler(this.monoGameEditor1_NewMap);
             // 
             // Form1
             // 
@@ -240,6 +250,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioPaintCollision;
         private System.Windows.Forms.RadioButton radioPaintTiles;
+        private System.Windows.Forms.ToolStripMenuItem previewToolStripMenuItem;
     }
 }
 
