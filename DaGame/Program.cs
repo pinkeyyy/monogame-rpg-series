@@ -1,10 +1,17 @@
-﻿namespace DaGame
+﻿using CommandLine;
+
+namespace DaGame
 {
     class Program
     {
         static void Main(string[] args)
         {
-            using (MainGame ourGame = new MainGame())
+            LaunchOptions options = new LaunchOptions();
+
+            Parser.Default.ParseArguments<LaunchOptions>(args)
+                .WithParsed(o => options = o);
+
+            using (MainGame ourGame = new MainGame(options))
             {
                 ourGame.Run();
             }

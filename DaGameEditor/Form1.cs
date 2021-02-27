@@ -2,6 +2,7 @@
 using DaGameEditor.Menus;
 using DaGameEngine.Tilemaps;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -10,9 +11,22 @@ namespace DaGameEditor
 {
     public partial class Form1 : Form
     {
+        private const string TITLE_TEXT = "Da Game Editor";
+        private const string TITLE_TEXT_SAVED = "Da Game Editor [{0}]";
+        private string currentMapPath;
+
         public Form1()
         {
+            ValidateConfig();
             InitializeComponent();
+        }
+
+        private void ValidateConfig()
+        {
+            EditorConfig config = EditorConfig.Get();
+
+            if (!File.Exists(config.ClientExecutablePath))
+                throw new FileNotFoundException($"Client executable not found: {config.ClientExecutablePath}");
         }
 
         private void newToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -82,6 +96,7 @@ namespace DaGameEditor
 
             listBoxLayers.SelectedIndex = 0;
             monoGameEditor1.SetCollisionLayerVisible(checkCollisionLayerVisible.Checked);
+            OnMapNew();
         }
 
         private void listBoxLayers_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -101,6 +116,7 @@ namespace DaGameEditor
                 using (FileStream fileStream = File.OpenWrite(dialog.FileName))
                 {
                     monoGameEditor1.SaveMap(fileStream);
+                    OnMapSave(dialog.FileName);
                 }
             }
         }
@@ -119,6 +135,7 @@ namespace DaGameEditor
                 using (FileStream fileStream = File.OpenRead(dialog.FileName))
                 {
                     monoGameEditor1.LoadMap(fileStream);
+                    OnMapLoad(dialog.FileName);
                 }
             }
         }
@@ -138,6 +155,44 @@ namespace DaGameEditor
         {
             if (radioPaintCollision.Checked)
                 monoGameEditor1.Mode = MonoGameEditor.PaintMode.Collision;
+        }
+
+        private void OnMapNew()
+        {
+            Text = TITLE_TEXT;
+            previewToolStripMenuItem.Enabled = false;
+            currentMapPath = null;
+        }
+
+        private void OnMapSave(string mapPath)
+        {
+            Text = string.Format(TITLE_TEXT_SAVED, mapPath);
+            previewToolStripMenuItem.Enabled = true;
+            currentMapPath = mapPath;
+        }
+
+        private void OnMapLoad(string mapPath)
+        {
+            Text = string.Format(TITLE_TEXT_SAVED, mapPath);
+            previewToolStripMenuItem.Enabled = true;
+            currentMapPath = mapPath;
+        }
+
+        private void previewToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            EditorConfig config = EditorConfig.Get();
+
+            Process process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = Path.GetFullPath(config.ClientExecutablePath),
+                    Arguments = $"--map \"{Path.GetFullPath(currentMapPath)}\""
+                }
+            };
+
+            process.Start();
+            process.WaitForExit();
         }
     }
 }
