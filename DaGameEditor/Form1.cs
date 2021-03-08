@@ -1,5 +1,6 @@
 ﻿using DaGameEditor.Extensions;
 using DaGameEditor.Menus;
+using DaGameEditor.Tools;
 using DaGameEngine.Tilemaps;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,10 +16,17 @@ namespace DaGameEditor
         private const string TITLE_TEXT_SAVED = "Da Game Editor [{0}]";
         private string currentMapPath;
 
+        private TilePaintingTool tilePaintingTool;
+        private CollisionPaintingTool collisionPaintingTool;
+
         public Form1()
         {
             ValidateConfig();
             InitializeComponent();
+
+            tilePaintingTool = new TilePaintingTool();
+            collisionPaintingTool = new CollisionPaintingTool();
+            monoGameEditor1.ActivePaintingTool = tilePaintingTool;
         }
 
         private void ValidateConfig()
@@ -67,7 +75,7 @@ namespace DaGameEditor
                 TileIndex = frameIndex
             };
 
-            monoGameEditor1.BrushTile = brushTile;
+            tilePaintingTool.BrushTile = brushTile;
         }
 
         private void buttonEditTileset_Click(object sender, System.EventArgs e)
@@ -145,18 +153,6 @@ namespace DaGameEditor
             monoGameEditor1.SetCollisionLayerVisible(checkCollisionLayerVisible.Checked);
         }
 
-        private void radioPaintTiles_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (radioPaintTiles.Checked)
-                monoGameEditor1.Mode = MonoGameEditor.PaintMode.Tiles;
-        }
-
-        private void radioPaintCollision_CheckedChanged(object sender, System.EventArgs e)
-        {
-            if (radioPaintCollision.Checked)
-                monoGameEditor1.Mode = MonoGameEditor.PaintMode.Collision;
-        }
-
         private void OnMapNew()
         {
             Text = TITLE_TEXT;
@@ -193,6 +189,16 @@ namespace DaGameEditor
 
             process.Start();
             process.WaitForExit();
+        }
+
+        private void toolStripPaintTiles_Click(object sender, System.EventArgs e)
+        {
+            monoGameEditor1.ActivePaintingTool = tilePaintingTool;
+        }
+
+        private void toolStripPaintCollision_Click(object sender, System.EventArgs e)
+        {
+            monoGameEditor1.ActivePaintingTool = collisionPaintingTool;
         }
     }
 }

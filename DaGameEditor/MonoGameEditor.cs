@@ -1,4 +1,5 @@
-﻿using DaGameEngine;
+﻿using DaGameEditor.Tools;
+using DaGameEngine;
 using DaGameEngine.Tilemaps;
 using Microsoft.Xna.Framework;
 using MonoGame.Extended;
@@ -15,9 +16,8 @@ namespace DaGameEditor
         public event OnNewMapHandler NewMap;
 
         public Bootstrap Bootstrap { get; set; }
-        public Tile BrushTile { get;set; }
         public int ActiveLayer { get; set; }
-        public PaintMode Mode { get; set; }
+        public PaintingTool ActivePaintingTool { get; set; }
 
         private Map myMap;
         private Form form;
@@ -85,24 +85,21 @@ namespace DaGameEditor
             {
                 camera.Zoom = MathHelper.Clamp(camera.Zoom - mouseState.DeltaScrollWheelValue * 0.001f, camera.MinimumZoom, camera.MaximumZoom);
             }
-            else if (mouseState.IsButtonDown(MouseButton.Left))
+            
+            if (ActivePaintingTool != null)
             {
-                if (Mode == PaintMode.Tiles && tile != null && BrushTile != null)
+                if (ActivePaintingTool.IsValidPosition(myMap, keyboardState, tilePositionDetail, cellPositionDetail))
                 {
-                    tile.TilesetIndex = BrushTile.TilesetIndex;
-                    tile.TileIndex = BrushTile.TileIndex;
-                }
-                else if (Mode == PaintMode.Collision && cellPositionDetail.IsValidPosition)
-                {
-                    if (keyboardState.IsControlDown())
-                        myMap.CollisionLayer.UpdateCell(false, cellPositionDetail.Coordinates.X, cellPositionDetail.Coordinates.Y);
+                    if (mouseState.IsButtonDown(MouseButton.Left))
+                    {
+                        ActivePaintingTool.Paint(myMap, keyboardState, tilePositionDetail, cellPositionDetail);
+                    }
                     else
-                        myMap.CollisionLayer.UpdateCell(true, cellPositionDetail.Coordinates.X, cellPositionDetail.Coordinates.Y);
+                    {
+                        ActivePaintingTool.Hover(myMap, keyboardState, tilePositionDetail, cellPositionDetail);
+                    }
                 }
             }
-
-            if (BrushTile != null && tilePositionDetail.IsValidPosition)
-                myMap.AddImmediateTile(tilePositionDetail.Coordinates.X, tilePositionDetail.Coordinates.Y, BrushTile);
         }
 
         protected override void Draw()
@@ -122,12 +119,6 @@ namespace DaGameEditor
 
                 viewportSize = graphicsDeviceSize;
             }
-        }
-
-        public enum PaintMode
-        {
-            Tiles = 0,
-            Collision = 1
         }
     }
 }

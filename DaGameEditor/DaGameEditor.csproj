@@ -93,6 +93,9 @@
     <Compile Include="Controls\TilesetPreviewer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\ToolStripRadioButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="EditorConfig.cs" />
     <Compile Include="Extensions\RectangleExtensions.cs" />
     <Compile Include="Extensions\TilesetExtensions.cs" />
@@ -125,6 +128,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\CollisionPaintingTool.cs" />
+    <Compile Include="Tools\PaintingTool.cs" />
+    <Compile Include="Tools\TilePaintingTool.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
