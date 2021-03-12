@@ -194,11 +194,13 @@ namespace DaGameEditor
         private void toolStripPaintTiles_Click(object sender, System.EventArgs e)
         {
             monoGameEditor1.ActivePaintingTool = tilePaintingTool;
+            toolbox.SelectedIndex = 0;
         }
 
         private void toolStripPaintCollision_Click(object sender, System.EventArgs e)
         {
             monoGameEditor1.ActivePaintingTool = collisionPaintingTool;
+            toolbox.SelectedIndex = 1;
         }
     }
 }

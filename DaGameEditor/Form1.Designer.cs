@@ -45,8 +45,18 @@
             this.toolStripPaintCollision = new DaGameEditor.Controls.ToolStripRadioButton();
             this.tilesetPreviewer = new DaGameEditor.Controls.TilesetPreviewer();
             this.monoGameEditor1 = new DaGameEditor.MonoGameEditor();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabTilePaintingTool = new System.Windows.Forms.TabPage();
+            this.toolbox = new DaGameEditor.Controls.Toolbox();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.tabTilePaintingTool.SuspendLayout();
+            this.toolbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -106,20 +116,24 @@
             // 
             // comboBoxTilesets
             // 
+            this.comboBoxTilesets.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxTilesets.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTilesets.FormattingEnabled = true;
-            this.comboBoxTilesets.Location = new System.Drawing.Point(12, 143);
+            this.comboBoxTilesets.Location = new System.Drawing.Point(6, 6);
             this.comboBoxTilesets.Name = "comboBoxTilesets";
-            this.comboBoxTilesets.Size = new System.Drawing.Size(207, 21);
+            this.comboBoxTilesets.Size = new System.Drawing.Size(245, 21);
             this.comboBoxTilesets.TabIndex = 5;
             this.comboBoxTilesets.SelectedIndexChanged += new System.EventHandler(this.comboBoxTilesets_SelectedIndexChanged);
             // 
             // buttonEditTileset
             // 
+            this.buttonEditTileset.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonEditTileset.Enabled = false;
-            this.buttonEditTileset.Location = new System.Drawing.Point(12, 170);
+            this.buttonEditTileset.Location = new System.Drawing.Point(6, 33);
             this.buttonEditTileset.Name = "buttonEditTileset";
-            this.buttonEditTileset.Size = new System.Drawing.Size(207, 30);
+            this.buttonEditTileset.Size = new System.Drawing.Size(245, 30);
             this.buttonEditTileset.TabIndex = 6;
             this.buttonEditTileset.Text = "Edit Tileset";
             this.buttonEditTileset.UseVisualStyleBackColor = true;
@@ -127,17 +141,20 @@
             // 
             // listBoxLayers
             // 
+            this.listBoxLayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxLayers.FormattingEnabled = true;
-            this.listBoxLayers.Location = new System.Drawing.Point(12, 359);
+            this.listBoxLayers.Location = new System.Drawing.Point(6, 298);
             this.listBoxLayers.Name = "listBoxLayers";
-            this.listBoxLayers.Size = new System.Drawing.Size(207, 82);
+            this.listBoxLayers.Size = new System.Drawing.Size(245, 82);
             this.listBoxLayers.TabIndex = 7;
             this.listBoxLayers.SelectedIndexChanged += new System.EventHandler(this.listBoxLayers_SelectedIndexChanged);
             // 
             // checkCollisionLayerVisible
             // 
+            this.checkCollisionLayerVisible.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkCollisionLayerVisible.AutoSize = true;
-            this.checkCollisionLayerVisible.Location = new System.Drawing.Point(13, 448);
+            this.checkCollisionLayerVisible.Location = new System.Drawing.Point(12, 429);
             this.checkCollisionLayerVisible.Name = "checkCollisionLayerVisible";
             this.checkCollisionLayerVisible.Size = new System.Drawing.Size(129, 17);
             this.checkCollisionLayerVisible.TabIndex = 8;
@@ -182,10 +199,13 @@
             // 
             // tilesetPreviewer
             // 
+            this.tilesetPreviewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tilesetPreviewer.AutoScroll = true;
-            this.tilesetPreviewer.Location = new System.Drawing.Point(12, 206);
+            this.tilesetPreviewer.Location = new System.Drawing.Point(6, 69);
             this.tilesetPreviewer.Name = "tilesetPreviewer";
-            this.tilesetPreviewer.Size = new System.Drawing.Size(207, 147);
+            this.tilesetPreviewer.Size = new System.Drawing.Size(245, 223);
             this.tilesetPreviewer.TabIndex = 4;
             this.tilesetPreviewer.Tileset = null;
             this.tilesetPreviewer.TileSelect += new DaGameEditor.Controls.TilesetPreviewer.OnTileSelectHandler(this.tilesetPreviewer_TileSelect);
@@ -194,30 +214,79 @@
             // 
             this.monoGameEditor1.ActiveLayer = 0;
             this.monoGameEditor1.ActivePaintingTool = null;
-            this.monoGameEditor1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.monoGameEditor1.Bootstrap = null;
-            this.monoGameEditor1.Location = new System.Drawing.Point(244, 52);
+            this.monoGameEditor1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.monoGameEditor1.Location = new System.Drawing.Point(0, 0);
             this.monoGameEditor1.MouseHoverUpdatesOnly = false;
             this.monoGameEditor1.Name = "monoGameEditor1";
-            this.monoGameEditor1.Size = new System.Drawing.Size(544, 443);
+            this.monoGameEditor1.Size = new System.Drawing.Size(530, 458);
             this.monoGameEditor1.TabIndex = 0;
             this.monoGameEditor1.Text = "monoGameEditor1";
             this.monoGameEditor1.NewMap += new DaGameEditor.MonoGameEditor.OnNewMapHandler(this.monoGameEditor1_NewMap);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(470, 349);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabTilePaintingTool
+            // 
+            this.tabTilePaintingTool.Controls.Add(this.comboBoxTilesets);
+            this.tabTilePaintingTool.Controls.Add(this.tilesetPreviewer);
+            this.tabTilePaintingTool.Controls.Add(this.listBoxLayers);
+            this.tabTilePaintingTool.Controls.Add(this.buttonEditTileset);
+            this.tabTilePaintingTool.Location = new System.Drawing.Point(4, 22);
+            this.tabTilePaintingTool.Name = "tabTilePaintingTool";
+            this.tabTilePaintingTool.Padding = new System.Windows.Forms.Padding(3);
+            this.tabTilePaintingTool.Size = new System.Drawing.Size(267, 386);
+            this.tabTilePaintingTool.TabIndex = 0;
+            this.tabTilePaintingTool.Text = "Tile Painting Tool";
+            this.tabTilePaintingTool.UseVisualStyleBackColor = true;
+            // 
+            // toolbox
+            // 
+            this.toolbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.toolbox.Controls.Add(this.tabTilePaintingTool);
+            this.toolbox.Controls.Add(this.tabPage2);
+            this.toolbox.Location = new System.Drawing.Point(3, 3);
+            this.toolbox.Name = "toolbox";
+            this.toolbox.SelectedIndex = 0;
+            this.toolbox.Size = new System.Drawing.Size(275, 412);
+            this.toolbox.TabIndex = 11;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 49);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.toolbox);
+            this.splitContainer1.Panel1.Controls.Add(this.checkCollisionLayerVisible);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.monoGameEditor1);
+            this.splitContainer1.Size = new System.Drawing.Size(800, 458);
+            this.splitContainer1.SplitterDistance = 266;
+            this.splitContainer1.TabIndex = 12;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 507);
-            this.Controls.Add(this.comboBoxTilesets);
-            this.Controls.Add(this.tilesetPreviewer);
-            this.Controls.Add(this.buttonEditTileset);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.listBoxLayers);
-            this.Controls.Add(this.checkCollisionLayerVisible);
-            this.Controls.Add(this.monoGameEditor1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
@@ -228,6 +297,13 @@
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.tabTilePaintingTool.ResumeLayout(false);
+            this.toolbox.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -251,6 +327,10 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private Controls.ToolStripRadioButton toolStripPaintTiles;
         private Controls.ToolStripRadioButton toolStripPaintCollision;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabTilePaintingTool;
+        private Controls.Toolbox toolbox;
+        private System.Windows.Forms.SplitContainer splitContainer1;
     }
 }
 

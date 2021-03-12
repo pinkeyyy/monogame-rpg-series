@@ -93,6 +93,9 @@
     <Compile Include="Controls\TilesetPreviewer.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Toolbox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\ToolStripRadioButton.cs">
       <SubType>Component</SubType>
     </Compile>
