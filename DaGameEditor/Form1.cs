@@ -207,6 +207,11 @@ namespace DaGameEditor
             toolbox.SelectedIndex = 1;
         }
 
+        private void toolStripPaintObjects_Click(object sender, System.EventArgs e)
+        {
+            toolbox.SelectedIndex = 2;
+        }
+
         private void checkScaleTiles_CheckedChanged(object sender, System.EventArgs e)
         {
             currentMap.ScaleTiles = checkScaleTiles.Checked;

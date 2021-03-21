@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="Entities\Entity.cs" />
     <Compile Include="JsonConverters\RectangleJsonConverter.cs" />
     <Compile Include="Tilemaps\CollisionLayer.cs" />
     <Compile Include="Tilemaps\Map.cs" />
