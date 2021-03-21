@@ -33,6 +33,7 @@ namespace DaGameEditor.Controls
         private int selectedFrameIndex = -1;
         private Size originalSize;
         private int currentZoomLevel;
+        private int currentEventNumber = 0;
 
         public delegate void OnTileSelectHandler(Tileset tileset, int frameIndex);
         public event OnTileSelectHandler TileSelect;
@@ -122,6 +123,15 @@ namespace DaGameEditor.Controls
 
             HandledMouseEventArgs handledArgs = (HandledMouseEventArgs)e;
             handledArgs.Handled = true;
+
+            if (SystemInformation.MouseWheelScrollLines != -1 && currentEventNumber < SystemInformation.MouseWheelScrollLines)
+            {
+                currentEventNumber++;
+                return;
+            }
+
+            currentEventNumber = 0;
+
 
             if (e.Delta > 0)
             {
