@@ -19,6 +19,16 @@ namespace DaGameEditor.Menus
             InitializeComponent();
         }
 
+        private void NewMapDialog_Load(object sender, EventArgs e)
+        {
+            EditorConfig config = EditorConfig.Get();
+
+            numericMapWidth.Value = config.DefaultMapWidth;
+            numericMapHeight.Value = config.DefaultMapHeight;
+            numericTileWidth.Value = config.DefaultTileWidth;
+            numericTileHeight.Value = config.DefaultTileHeight;
+        }
+
         private void buttonOk_Click(object sender, EventArgs e)
         {
             Details = new CreationDetails()

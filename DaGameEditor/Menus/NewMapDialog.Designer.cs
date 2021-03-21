@@ -154,6 +154,7 @@
             this.Name = "NewMapDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "NewMapDialog";
+            this.Load += new System.EventHandler(this.NewMapDialog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericMapWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericMapHeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTileWidth)).EndInit();

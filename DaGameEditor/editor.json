@@ -1,3 +1,7 @@
 ﻿{
-  "ClientExecutablePath": "..\\..\\..\\DaGame\\bin\\debug\\DaGame.exe"
+  "ClientExecutablePath": "..\\..\\..\\DaGame\\bin\\debug\\DaGame.exe",
+  "DefaultMapWidth": 20,
+  "DefaultMapHeight": 20,
+  "DefaultTileWidth": 64,
+  "DefaultTileHeight": 64
 }

@@ -27,8 +27,11 @@ namespace DaGameEditor
         protected override void Initialize()
         {
             base.Initialize();
+
+            EditorConfig config = EditorConfig.Get();
+
             Bootstrap = new Bootstrap(GraphicsDevice, @"..\..\..\Content");
-            CreateMap(10, 10, 32, 32);
+            CreateMap(config.DefaultMapWidth, config.DefaultMapHeight, config.DefaultTileWidth, config.DefaultTileHeight);
             form = FindForm();
 
             camera = new OrthographicCamera(GraphicsDevice)

@@ -30,5 +30,9 @@ namespace DaGameEditor
         }
 
         public string ClientExecutablePath { get; set; }
+        public int DefaultMapWidth { get; set; } = 10;
+        public int DefaultMapHeight { get; set; } = 10;
+        public int DefaultTileWidth { get; set; } = 32;
+        public int DefaultTileHeight { get; set; } = 32;
     }
 }
