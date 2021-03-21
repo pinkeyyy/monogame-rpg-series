@@ -59,7 +59,7 @@ namespace DaGameEngine.Tilemaps
             return detail;
         }
 
-        public void Draw(SpriteBatch pSpriteBatch, Camera<Vector2> camera, List<Tileset> tilesets)
+        public void Draw(SpriteBatch pSpriteBatch, Camera<Vector2> camera, List<Tileset> tilesets, bool scaleTiles)
         {
             for (int x = 0; x < tiles.GetLength(0); x++)
             {
@@ -67,7 +67,7 @@ namespace DaGameEngine.Tilemaps
                 {
                     Vector2 tilePosition = new Vector2(x * tileWidth, y * tileHeight);
                     Tile tile = tiles[x, y];
-                    tile.Draw(pSpriteBatch, tilePosition, tileWidth, tileHeight, tilesets);
+                    tile.Draw(pSpriteBatch, tilePosition, tileWidth, tileHeight, tilesets, scaleTiles);
                 }
             }
         }

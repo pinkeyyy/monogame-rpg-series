@@ -15,6 +15,7 @@ namespace DaGameEditor
         private const string TITLE_TEXT = "Da Game Editor";
         private const string TITLE_TEXT_SAVED = "Da Game Editor [{0}]";
         private string currentMapPath;
+        private Map currentMap;
 
         private TilePaintingTool tilePaintingTool;
         private CollisionPaintingTool collisionPaintingTool;
@@ -104,7 +105,7 @@ namespace DaGameEditor
 
             listBoxLayers.SelectedIndex = 0;
             monoGameEditor1.SetCollisionLayerVisible(checkCollisionLayerVisible.Checked);
-            OnMapNew();
+            OnMapNew(newMap);
         }
 
         private void listBoxLayers_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -142,8 +143,7 @@ namespace DaGameEditor
             {
                 using (FileStream fileStream = File.OpenRead(dialog.FileName))
                 {
-                    monoGameEditor1.LoadMap(fileStream);
-                    OnMapLoad(dialog.FileName);
+                    OnMapLoad(dialog.FileName, monoGameEditor1.LoadMap(fileStream));
                 }
             }
         }
@@ -153,11 +153,13 @@ namespace DaGameEditor
             monoGameEditor1.SetCollisionLayerVisible(checkCollisionLayerVisible.Checked);
         }
 
-        private void OnMapNew()
+        private void OnMapNew(Map newMap)
         {
             Text = TITLE_TEXT;
             previewToolStripMenuItem.Enabled = false;
             currentMapPath = null;
+            currentMap = newMap;
+            checkScaleTiles.Checked = newMap.ScaleTiles;
         }
 
         private void OnMapSave(string mapPath)
@@ -167,11 +169,13 @@ namespace DaGameEditor
             currentMapPath = mapPath;
         }
 
-        private void OnMapLoad(string mapPath)
+        private void OnMapLoad(string mapPath, Map loadedMap)
         {
             Text = string.Format(TITLE_TEXT_SAVED, mapPath);
             previewToolStripMenuItem.Enabled = true;
             currentMapPath = mapPath;
+            currentMap = loadedMap;
+            checkScaleTiles.Checked = loadedMap.ScaleTiles;
         }
 
         private void previewToolStripMenuItem_Click(object sender, System.EventArgs e)
@@ -201,6 +205,11 @@ namespace DaGameEditor
         {
             monoGameEditor1.ActivePaintingTool = collisionPaintingTool;
             toolbox.SelectedIndex = 1;
+        }
+
+        private void checkScaleTiles_CheckedChanged(object sender, System.EventArgs e)
+        {
+            currentMap.ScaleTiles = checkScaleTiles.Checked;
         }
     }
 }

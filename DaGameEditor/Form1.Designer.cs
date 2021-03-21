@@ -45,10 +45,12 @@
             this.toolStripPaintCollision = new DaGameEditor.Controls.ToolStripRadioButton();
             this.tilesetPreviewer = new DaGameEditor.Controls.TilesetPreviewer();
             this.monoGameEditor1 = new DaGameEditor.MonoGameEditor();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabCollisionPaintingTool = new System.Windows.Forms.TabPage();
             this.tabTilePaintingTool = new System.Windows.Forms.TabPage();
             this.toolbox = new DaGameEditor.Controls.Toolbox();
+            this.tabObjectPaintingTool = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.checkScaleTiles = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.tabTilePaintingTool.SuspendLayout();
@@ -144,7 +146,7 @@
             this.listBoxLayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBoxLayers.FormattingEnabled = true;
-            this.listBoxLayers.Location = new System.Drawing.Point(6, 298);
+            this.listBoxLayers.Location = new System.Drawing.Point(6, 275);
             this.listBoxLayers.Name = "listBoxLayers";
             this.listBoxLayers.Size = new System.Drawing.Size(245, 82);
             this.listBoxLayers.TabIndex = 7;
@@ -205,7 +207,7 @@
             this.tilesetPreviewer.AutoScroll = true;
             this.tilesetPreviewer.Location = new System.Drawing.Point(6, 69);
             this.tilesetPreviewer.Name = "tilesetPreviewer";
-            this.tilesetPreviewer.Size = new System.Drawing.Size(245, 223);
+            this.tilesetPreviewer.Size = new System.Drawing.Size(245, 200);
             this.tilesetPreviewer.TabIndex = 4;
             this.tilesetPreviewer.Tileset = null;
             this.tilesetPreviewer.TileSelect += new DaGameEditor.Controls.TilesetPreviewer.OnTileSelectHandler(this.tilesetPreviewer_TileSelect);
@@ -224,18 +226,18 @@
             this.monoGameEditor1.Text = "monoGameEditor1";
             this.monoGameEditor1.NewMap += new DaGameEditor.MonoGameEditor.OnNewMapHandler(this.monoGameEditor1_NewMap);
             // 
-            // tabPage2
+            // tabCollisionPaintingTool
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(470, 349);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabCollisionPaintingTool.Location = new System.Drawing.Point(4, 22);
+            this.tabCollisionPaintingTool.Name = "tabCollisionPaintingTool";
+            this.tabCollisionPaintingTool.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCollisionPaintingTool.Size = new System.Drawing.Size(267, 386);
+            this.tabCollisionPaintingTool.TabIndex = 1;
+            this.tabCollisionPaintingTool.Text = "Collision Painting Tool";
             // 
             // tabTilePaintingTool
             // 
+            this.tabTilePaintingTool.Controls.Add(this.checkScaleTiles);
             this.tabTilePaintingTool.Controls.Add(this.comboBoxTilesets);
             this.tabTilePaintingTool.Controls.Add(this.tilesetPreviewer);
             this.tabTilePaintingTool.Controls.Add(this.listBoxLayers);
@@ -254,12 +256,23 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.toolbox.Controls.Add(this.tabTilePaintingTool);
-            this.toolbox.Controls.Add(this.tabPage2);
+            this.toolbox.Controls.Add(this.tabCollisionPaintingTool);
+            this.toolbox.Controls.Add(this.tabObjectPaintingTool);
             this.toolbox.Location = new System.Drawing.Point(3, 3);
             this.toolbox.Name = "toolbox";
             this.toolbox.SelectedIndex = 0;
             this.toolbox.Size = new System.Drawing.Size(275, 412);
             this.toolbox.TabIndex = 11;
+            // 
+            // tabObjectPaintingTool
+            // 
+            this.tabObjectPaintingTool.Location = new System.Drawing.Point(4, 22);
+            this.tabObjectPaintingTool.Name = "tabObjectPaintingTool";
+            this.tabObjectPaintingTool.Padding = new System.Windows.Forms.Padding(3);
+            this.tabObjectPaintingTool.Size = new System.Drawing.Size(267, 386);
+            this.tabObjectPaintingTool.TabIndex = 2;
+            this.tabObjectPaintingTool.Text = "Object Painting Tool";
+            this.tabObjectPaintingTool.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
             // 
@@ -280,6 +293,18 @@
             this.splitContainer1.SplitterDistance = 266;
             this.splitContainer1.TabIndex = 12;
             // 
+            // checkScaleTiles
+            // 
+            this.checkScaleTiles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.checkScaleTiles.AutoSize = true;
+            this.checkScaleTiles.Location = new System.Drawing.Point(6, 363);
+            this.checkScaleTiles.Name = "checkScaleTiles";
+            this.checkScaleTiles.Size = new System.Drawing.Size(78, 17);
+            this.checkScaleTiles.TabIndex = 9;
+            this.checkScaleTiles.Text = "Scale Tiles";
+            this.checkScaleTiles.UseVisualStyleBackColor = true;
+            this.checkScaleTiles.CheckedChanged += new System.EventHandler(this.checkScaleTiles_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -298,6 +323,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tabTilePaintingTool.ResumeLayout(false);
+            this.tabTilePaintingTool.PerformLayout();
             this.toolbox.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
@@ -327,10 +353,12 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private Controls.ToolStripRadioButton toolStripPaintTiles;
         private Controls.ToolStripRadioButton toolStripPaintCollision;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabCollisionPaintingTool;
         private System.Windows.Forms.TabPage tabTilePaintingTool;
         private Controls.Toolbox toolbox;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TabPage tabObjectPaintingTool;
+        private System.Windows.Forms.CheckBox checkScaleTiles;
     }
 }
 

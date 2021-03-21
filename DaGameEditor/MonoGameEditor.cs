@@ -38,10 +38,11 @@ namespace DaGameEditor
             };
         }
 
-        public void CreateMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight)
+        public Map CreateMap(int mapWidth, int mapHeight, int tileWidth, int tileHeight)
         {
             myMap = new Map(tileWidth, tileHeight, mapWidth, mapHeight);
             NewMap?.Invoke(myMap);
+            return myMap;
         }
 
         public void SaveMap(Stream stream)
@@ -49,10 +50,11 @@ namespace DaGameEditor
             myMap.Save(stream);
         }
 
-        public void LoadMap(Stream stream)
+        public Map LoadMap(Stream stream)
         {
             myMap = new Map(stream);
             NewMap?.Invoke(myMap);
+            return myMap;
         }
 
         public void SetCollisionLayerVisible(bool visible)

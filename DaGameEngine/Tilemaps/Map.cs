@@ -11,6 +11,7 @@ namespace DaGameEngine.Tilemaps
     {
         public List<TileLayer> Layers { get; private set; }
         public CollisionLayer CollisionLayer { get; private set; }
+        public bool ScaleTiles { get; set; }
 
         private int tileWidth;
         private int tileHeight;
@@ -63,7 +64,7 @@ namespace DaGameEngine.Tilemaps
 
             for (int i = 0; i < Layers.Count; i++)
             {
-                Layers[i].Draw(pSpriteBatch, camera, tilesets);
+                Layers[i].Draw(pSpriteBatch, camera, tilesets, ScaleTiles);
             }
 
             CollisionLayer.Draw(pSpriteBatch, camera);
@@ -72,7 +73,7 @@ namespace DaGameEngine.Tilemaps
             {
                 var (x, y, tile) = immediateTiles[i];
                 Vector2 tilePosition = new Vector2(x * tileWidth, y * tileHeight);
-                tile.Draw(pSpriteBatch, tilePosition, tileWidth, tileHeight, tilesets);
+                tile.Draw(pSpriteBatch, tilePosition, tileWidth, tileHeight, tilesets, ScaleTiles);
             }
 
             pSpriteBatch.End();
@@ -92,6 +93,7 @@ namespace DaGameEngine.Tilemaps
                 {
                     Layers[i].Save(writer);
                 }
+                writer.Write(ScaleTiles);
                 CollisionLayer.Save(writer);
             }
         }
@@ -109,6 +111,7 @@ namespace DaGameEngine.Tilemaps
                 {
                     Layers.Add(new TileLayer(reader));
                 }
+                ScaleTiles = reader.ReadBoolean();
                 CollisionLayer = new CollisionLayer(reader);
             }
         }
